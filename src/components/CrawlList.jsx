@@ -57,6 +57,7 @@ export default function CrawlList({setLoggedInUser, loggedInUser}) {
                 <div className="nav-bar">
                     <button type="button" onClick={() => navigate('/about')}> About</button>
                     <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
+                    <button type="button" onClick={() => navigate('/eventslist')}> View All Events</button>
                     <button type="button" onClick={() => navigate('/account')}> Account Info</button>
                     <button type="button" onClick={loggedInUser ? logOut : () => navigate('/')}> Exit</button>
                 </div>
@@ -151,7 +152,7 @@ function BarCrawl({crawl, barArray, navigate}){
                 null
             }
             <button className="bar-crawl-review-button" onClick={makeEvent}>
-                Make Crawl into an Event
+                Create a Crawl Event
             </button>
         </div>
     )

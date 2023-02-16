@@ -105,9 +105,10 @@ export default function Account ({loggedInUser, setLoggedInUser}){
                 <img className="header-logo" src={logo1} onClick={() => navigate('/home')}/>
                 <div className="nav-bar">
                     <button type="button" onClick={() => navigate('/about')}> About</button>
-                    <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
-                    <button type="button" onClick={loggedInUser ? () => navigate('/account') : "Create an Accout or Login"}> Account Info</button>
-                    <button type="button" onClick={loggedInUser ? logOut : () => navigate('/')}> Exit</button>
+                    <button type="button" onClick={() => navigate('/eventslist')}> View All Events</button>
+                    <button type="button" onClick={() => navigate('/account')}> Account Info</button>
+                    <button type="button" onClick={logOut}> Exit</button>
+
                 </div>
             </div>
 

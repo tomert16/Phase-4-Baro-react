@@ -29,6 +29,7 @@ export default function EventsList({setLoggedInUser, loggedInUser}) {
                 <div className="nav-bar">
                     <button type="button" onClick={() => navigate('/about')}> About</button>
                     <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
+                    <button type="button" onClick={() => navigate('/eventslist')}> View All Events</button>
                     <button type="button" onClick={() => navigate('/account')}> Account Info</button>
                     <button type="button" onClick={loggedInUser ? logOut : () => navigate('/')}> Exit</button>
                 </div>
