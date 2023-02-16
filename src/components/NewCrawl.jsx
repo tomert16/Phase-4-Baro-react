@@ -13,7 +13,7 @@ export default function NewCrawl({barCrawlData, loggedInUser}){
     const [barArray, setBarArray] = useState([])
     useEffect(() => {
         const fetchBars = async () => {
-            const req = await fetch('http://localhost:3000/bars')
+            const req = await fetch('/bars')
             const res = await req.json()
             setBarArray(res)
         }        
@@ -97,7 +97,7 @@ function handleReviewSubmit(barCrawlString, barCrawlNameInput, loggedInUser){
         user_id: loggedInUser.id,
         public_private: true
     }
-    fetch ('http://localhost:3000/bar_crawls', {
+    fetch ('/bar_crawls', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

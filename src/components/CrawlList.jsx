@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {SlArrowRight} from 'react-icons/sl'
-import logo1 from './assets/cropped-logo1.png'
+import logo1 from './assets/cropped-logo1.png';
+import barPhoto from './assets/another-bar-photo.jpg'
 
-export default function CrawlList({setLoggedInUser}) {
+export default function CrawlList({setLoggedInUser, loggedInUser}) {
     const navigate = useNavigate()
     const [crawlArray, setCrawlArray] = useState([])
     const [barArray, setBarArray] = useState([])
@@ -13,13 +14,13 @@ export default function CrawlList({setLoggedInUser}) {
     //fetch the array of all the crawls
     useEffect(() => {
         const fetchCrawls = async () => {
-            const req = await fetch('http://localhost:3000/bar_crawls')
+            const req = await fetch('/bar_crawls')
             const res = await req.json()
             setCrawlArray(res)
         }
 
         const fetchBars = async () => {
-            const req = await fetch('http://localhost:3000/bars')
+            const req = await fetch('/bars')
             const res = await req.json()
             setBarArray(res)        
         }
@@ -37,7 +38,7 @@ export default function CrawlList({setLoggedInUser}) {
     function logOut(){
         // setLoggedInUser(undefined)
         // navigate('/')
-        fetch("http://localhost:3000/logout", {
+        fetch("/logout", {
             method: "DELETE",
         }).then((r) => {
             if (r.ok) {
@@ -56,11 +57,12 @@ export default function CrawlList({setLoggedInUser}) {
                 <div className="nav-bar">
                     <button type="button" onClick={() => navigate('/about')}> About</button>
                     <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
+                    <button type="button" onClick={() => navigate('/eventslist')}> View All Events</button>
                     <button type="button" onClick={() => navigate('/account')}> Account Info</button>
-                    <button type="button" onClick={logOut}> Exit</button>
+                    <button type="button" onClick={loggedInUser ? logOut : () => navigate('/')}> Exit</button>
                 </div>
             </div>
-            <img className="crawllist-image" src="src/assets/another-bar-photo.jpg" />
+            <img className="crawllist-image" src={barPhoto} />
             <h1 className="crawllist-page-title">Browse Existing Bar Crawls</h1>
 
 
@@ -71,6 +73,7 @@ export default function CrawlList({setLoggedInUser}) {
                             key={crawl.id}
                             crawl={crawl}
                             barArray={barArray}
+                            navigate={navigate}
                         />
                     )
                 })}
@@ -80,7 +83,7 @@ export default function CrawlList({setLoggedInUser}) {
 }
 
 //function to show an individual crawl
-function BarCrawl({crawl, barArray}){   
+function BarCrawl({crawl, barArray, navigate}){   
 
     //state to toggle showing the review popup
     const [toggleReviews,  setToggleReviews] = useState(false);
@@ -100,6 +103,10 @@ function BarCrawl({crawl, barArray}){
     //flip the state of the review toggle
     const handleToggle = () => {
         setToggleReviews(!toggleReviews);
+    }
+
+    const makeEvent = () => {
+        navigate('/createeventspage', {state: {crawl: crawl}})
     }
     
 
@@ -127,18 +134,16 @@ function BarCrawl({crawl, barArray}){
                 <div className="form-popup">
                     <div className="form-div">
                         <div className="crawl-reviews">
-
-                        <h3>{crawl.bar_crawl_name} Reviews</h3>
-                        {/* if we have no reviews tell the user that */}
-                        {crawl.bar_crawl_reviews.length === 0 ? <div> No Reviews Yet</div> : null}
-                        {/* show each review */}
-                        {crawl.bar_crawl_reviews.map((review) => {
-                            return(
-                                <CrawlReview review={review}/>
-                            )
-                        })}
-                        <button className="exit-form" onClick={handleToggle}> Hide Reviews</button>
-
+                            <h3>{crawl.bar_crawl_name} Reviews</h3>
+                            {/* if we have no reviews tell the user that */}
+                            {crawl.bar_crawl_reviews.length === 0 ? <div> No Reviews Yet</div> : null}
+                            {/* show each review */}
+                            {crawl.bar_crawl_reviews.map((review) => {
+                                return(
+                                    <CrawlReview review={review}/>
+                                )
+                            })}
+                            <button className="exit-form" onClick={handleToggle}> Hide Reviews</button>
                         </div>
                     </div>
 
@@ -146,7 +151,9 @@ function BarCrawl({crawl, barArray}){
                 : 
                 null
             }
-
+            <button className="bar-crawl-review-button" onClick={makeEvent}>
+                Create a Crawl Event
+            </button>
         </div>
     )
 }

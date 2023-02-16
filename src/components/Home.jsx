@@ -17,7 +17,7 @@ export default function Home ({setClickedBar, setBarCrawlData, setLoggedInUser, 
     //fetch all the bars 
     useEffect(() => {
         const fetchBars = async () => {
-            const req = await fetch('http://localhost:3000/bars')
+            const req = await fetch('/bars')
             const res = await req.json()
             setBarArray(res)
         }
@@ -31,7 +31,7 @@ export default function Home ({setClickedBar, setBarCrawlData, setLoggedInUser, 
 
 
     // const addCrawls = async () => {
-    //     fetch ('http://localhost:3000/crawl_list', {
+    //     fetch ('/crawl_list', {
     //         method: 'POST',
     //         headers: {
     //             'Content-Type': 'application/json'
@@ -67,12 +67,12 @@ export default function Home ({setClickedBar, setBarCrawlData, setLoggedInUser, 
      function logOut(){
         // setLoggedInUser(undefined)
         // navigate('/')
-        fetch("http://localhost:3000/logout", {
+        fetch("/logout", {
             method: "DELETE",
         }).then((r) => {
             if (r.ok) {
-                setLoggedInUser(null)
                 navigate('/')
+                setLoggedInUser(null)
             }
         })
      }
@@ -84,14 +84,14 @@ export default function Home ({setClickedBar, setBarCrawlData, setLoggedInUser, 
     return(
         <div className="homepage">
             {/* Test Buttons */}
-
             <div className="header-div">
                 <img className="header-logo" src={logo1} onClick={() => navigate('/home')}/>
                 <div className="nav-bar">
                     <button type="button" onClick={() => navigate('/about')}> About</button>
                     <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
+                    <button type="button" onClick={() => navigate('/eventslist')}> View All Events</button>
                     <button type="button" onClick={() => navigate('/account')}> Account Info</button>
-                    <button type="button" onClick={logOut}> Exit</button>
+                    <button type="button" onClick={loggedInUser ? logOut : () => navigate('/')}> Exit</button>
                 </div>
             </div>
             <img className="home-image" src="https://citizenside.com/wp-content/uploads/2022/12/bar-hopping-1-1170x780.jpg" />
@@ -171,7 +171,7 @@ function BarCard({type, setClickedBar, crawlArray, setCrawlArray, bar}) {
     //       // console.log(isFavorited)
     //     setIsFavorited(!isFavorited)
     // // console.log(id)
-    //     fetch(`http://localhost:3000/bars/${bar.id}`, {
+    //     fetch(`/bars/${bar.id}`, {
     //         method: "PATCH",
     //         headers: {
     //           "Content-Type": "application/json",

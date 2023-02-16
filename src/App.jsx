@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
 import {createBrowserRouter,RouterProvider,} from "react-router-dom";
+import { useState, useEffect } from "react";
 import LoginPage from "./components/LoginPage"
 import NewUser from "./components/NewUser"
 import Home from "./components/Home";
@@ -8,6 +8,8 @@ import BarInfo from "./components/BarInfo";
 import Account from "./components/Account";
 import NewCrawl from "./components/NewCrawl";
 import CrawlList from "./components/CrawlList";
+import EventsList from "./components/EventsList";
+import CreateEventsPage from "./components/CreateEventsPage";
 
 
 function App() {
@@ -19,7 +21,7 @@ function App() {
 
   // useEffect for auto-login
   useEffect(() => {
-    fetch("http://localhost:3000/me")
+    fetch("/me")
     .then((r) => {
       if (r.ok) {
         r.json().then((user) => setLoggedInUser(user));
@@ -28,6 +30,8 @@ function App() {
       }
     });
   },[]);
+
+  if(!setLoggedInUser)  return <LoginPage setLoggedInUser={setLoggedInUser} />
 
 
   //all the routes
@@ -74,6 +78,7 @@ function App() {
       path: "/account",
       element: <Account
         loggedInUser={loggedInUser}
+        
       />
     },
     {
@@ -87,6 +92,20 @@ function App() {
       path: "/crawllist",
       element: <CrawlList
         setLoggedInUser={setLoggedInUser}
+        loggedInUser={loggedInUser}
+      />
+    },
+    {
+      path: "/eventslist",
+      element: <EventsList
+        setLoggedInUser={setLoggedInUser}
+        loggedInUser={loggedInUser}
+      />
+    },
+    {
+      path: "/createeventspage",
+      element: <CreateEventsPage
+        loggedInUser={loggedInUser}
       />
     }
   ])

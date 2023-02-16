@@ -1,7 +1,9 @@
 import { useState,  useEffect } from "react"
 import { useNavigate } from "react-router-dom";
+import logo1 from './assets/cropped-logo1.png'
 
-export default function Account ({loggedInUser}){
+
+export default function Account ({loggedInUser, setLoggedInUser}){
     const navigate = useNavigate()
 
     //state to hold all the reviews
@@ -14,7 +16,7 @@ export default function Account ({loggedInUser}){
 
     //fetch all the reviews
     const fetchReviews = async () => {
-        const req = await fetch('http://localhost:3000/reviews')
+        const req = await fetch('/reviews')
         const res = await req.json()
         setReviewArray(res)
     }
@@ -24,10 +26,9 @@ export default function Account ({loggedInUser}){
     
     //fetch all the friends
     const fetchFriend = async () => {
-        const req = await fetch('http://localhost:3000/friendship_tables')
+        const req = await fetch('/friendship_tables')
         const res = await req.json()
         setFriendArray(res)
-        console.log(res)
     }
     useEffect(() => {
         fetchFriend()
@@ -35,7 +36,7 @@ export default function Account ({loggedInUser}){
 
     //fetch all users
     const fetchUsers = async () => {
-        const req = await fetch('http://localhost:3000/users')
+        const req = await fetch('/users')
         const res = await req.json()
         setUsersArray(res)
     }
@@ -67,6 +68,19 @@ export default function Account ({loggedInUser}){
             return loggedInUser.id === friend.user_1.id || friend.user_2.id === loggedInUser.id
     })
 
+    function logOut(){
+        // setLoggedInUser(undefined)
+        // navigate('/')
+        fetch("/logout", {
+            method: "DELETE",
+        }).then((r) => {
+            if (r.ok) {
+                navigate('/')
+                setLoggedInUser(null)
+            }
+        })
+     }
+
     //if the user is not logged in, don't show and info on this page and tell them to log in
     if (loggedInUser === undefined){
         return(
@@ -80,15 +94,50 @@ export default function Account ({loggedInUser}){
     //if there is a logged in user, show this info on the page
     else{
         return(
-            <div>
-                <h1> Account  Info</h1>
-                <button type="button" onClick={() => navigate('/home')}> Home</button>
-                <div className="user-text">User:  {loggedInUser.real_name}</div>
-                <div className="user-text">Display Name:  {loggedInUser.username}</div>
-                <div className="user-text">Password:  {loggedInUser.password}</div>
+            <div className="account-info-page">
+            <div className="header-div">
+                <img className="header-logo" src={logo1} onClick={() => navigate('/home')}/>
+                <div className="nav-bar">
+                    <button type="button" onClick={() => navigate('/about')}> About</button>
+                    <button type="button" onClick={() => navigate('/eventslist')}> View All Events</button>
+                    <button type="button" onClick={() => navigate('/account')}> Account Info</button>
+                    <button type="button" onClick={logOut}> Exit</button>
+
+                </div>
+            </div>
+
+            <div className="bar-info-container">
+                <h1 className="bar-info-name"> Account  Info</h1>
+                <div className="details-reviews-container">
+
+                    <div className="bar-info-details">
+                        <h2 className="user-info-title">Username: </h2> 
+                        <h2 className="user-info-detail">{loggedInUser.real_name}</h2>
+                        <h2 className="user-info-title">Display Name:  </h2>
+                        <h2 className="user-info-detail">{loggedInUser.username}</h2>
+                        <h2 className="user-info-title">Password:  </h2>
+                        <h2 className="user-info-detail">{loggedInUser.password} ***********</h2>
+                    </div>
                 <div className="user-review-container">
-                    <div className="friend-list" >
+
+                    <h1 className="your-reviews">Your Reviews</h1>
+                    {/* show all of the users reviews */}
+                    <div className="scroll-reviews">
+                    {filteredUserReviewArray.map((review) => {
+                        return (
+                            <UserReviewCard
+                                key={review.bar_id}
+                                review={review}
+                                bar={review.bar}
+                            />
+                        )
+                    })}                    
+                    </div>
+                </div>
+            </div>
+                <div className="friend-list">                   
                     <h1> Friends List</h1>
+
                     {/* show all of the users friends */}
                     {filteredUserFriendArray.map((friend) => {
                     return (
@@ -98,6 +147,8 @@ export default function Account ({loggedInUser}){
                             loggedInUser={loggedInUser}
                         />
                     )
+        
+
                 })}
                 {/* Look for friends button/toggle */}
                         <button
@@ -131,7 +182,6 @@ export default function Account ({loggedInUser}){
                             null           
                             }  
                     
-                    </div>     
                     <h2>Your Reviews</h2>
                     {/* show all of the users reviews */}
                     {filteredUserReviewArray.map((review) => {
@@ -143,7 +193,9 @@ export default function Account ({loggedInUser}){
                         />
                     )
                 })}                    
+
                 </div>
+            </div>
             </div>
         )
     }
@@ -155,8 +207,8 @@ function UserReviewCard({review, bar}){
         <div className="user-review-card">
 
             <div className="user-review-bar">{review.bar?.name}</div>
-            <div className="review-rating">{review.star_rating}</div>
-            <div className="review-body">{review.content}</div>            
+            <div className="user-review-rating">{review.star_rating}</div>
+            <div className="user-review-body">{review.content}</div>            
         </div>
     )
 }
