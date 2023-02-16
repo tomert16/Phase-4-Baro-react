@@ -21,7 +21,7 @@ function App() {
 
   // useEffect for auto-login
   useEffect(() => {
-    fetch("http://localhost:3000/me")
+    fetch("/me")
     .then((r) => {
       if (r.ok) {
         r.json().then((user) => setLoggedInUser(user));
@@ -78,6 +78,7 @@ function App() {
       path: "/account",
       element: <Account
         loggedInUser={loggedInUser}
+        
       />
     },
     {
@@ -91,12 +92,14 @@ function App() {
       path: "/crawllist",
       element: <CrawlList
         setLoggedInUser={setLoggedInUser}
+        loggedInUser={loggedInUser}
       />
     },
     {
       path: "/eventslist",
       element: <EventsList
         setLoggedInUser={setLoggedInUser}
+        loggedInUser={loggedInUser}
       />
     },
     {

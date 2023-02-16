@@ -55,7 +55,7 @@ export default function BarInfo({clickedBar, loggedInUser, setLoggedInUser}){
     function logOut(){
         // setLoggedInUser(undefined)
         // navigate('/')
-        fetch("http://localhost:3000/logout", {
+        fetch("/logout", {
             method: "DELETE",
         }).then((r) => {
             if (r.ok) {
@@ -75,7 +75,7 @@ export default function BarInfo({clickedBar, loggedInUser, setLoggedInUser}){
                     <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
                     <button type="button" onClick={() => navigate('/eventslist')}> View All Events</button>
                     <button type="button" onClick={() => navigate('/account')}> Account Info</button>
-                    <button type="button" onClick={logOut}> Exit</button>
+                    <button type="button" onClick={loggedInUser ? logOut : () => navigate('/')}> Exit</button>
                 </div>
             </div>
 
@@ -158,7 +158,7 @@ function BarReviewCard({review}){
     // const handleReviewEdit = (e) => {
     //     e.preventDefault();
         
-    //     fetch(`http://localhost:3000/reviews/${review.id}`,{
+    //     fetch(`/reviews/${review.id}`,{
     //         method: 'PATCH',
     //         headers: {
     //             "Content-Type": "application/json"
@@ -198,7 +198,7 @@ function BarReviewCard({review}){
 
             {/* {console.log(review.user?.username)}
             <button className="delete-button" onClick={(e) => {
-                fetch(`http://localhost:3000/reviews/${review.id}`, {
+                fetch(`/reviews/${review.id}`, {
                     method: "DELETE",
                 })
                 .then((r) => r.json())
@@ -231,7 +231,7 @@ function BarReviewForm ({loggedInUser, reviewArray, setReviewArray, clickedBar})
             bar_id: clickedBar.id
         }
 
-       const req = await fetch("http://localhost:3000/reviews",{
+       const req = await fetch("/reviews",{
             method: 'POST',
             header: {
                 "Content-Type": "application/json"

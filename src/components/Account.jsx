@@ -26,7 +26,7 @@ export default function Account ({loggedInUser, setLoggedInUser}){
     
     //fetch all the friends
     const fetchFriend = async () => {
-        const req = await fetch('http://localhost:3000/friendship_tables')
+        const req = await fetch('/friendship_tables')
         const res = await req.json()
         setFriendArray(res)
     }
@@ -36,7 +36,7 @@ export default function Account ({loggedInUser, setLoggedInUser}){
 
     //fetch all users
     const fetchUsers = async () => {
-        const req = await fetch('http://localhost:3000/users')
+        const req = await fetch('/users')
         const res = await req.json()
         setUsersArray(res)
     }
@@ -77,12 +77,12 @@ export default function Account ({loggedInUser, setLoggedInUser}){
     function logOut(){
         // setLoggedInUser(undefined)
         // navigate('/')
-        fetch("http://localhost:3000/logout", {
+        fetch("/logout", {
             method: "DELETE",
         }).then((r) => {
             if (r.ok) {
-                setLoggedInUser(null)
                 navigate('/')
+                setLoggedInUser(null)
             }
         })
      }
@@ -105,10 +105,10 @@ export default function Account ({loggedInUser, setLoggedInUser}){
                 <img className="header-logo" src={logo1} onClick={() => navigate('/home')}/>
                 <div className="nav-bar">
                     <button type="button" onClick={() => navigate('/about')}> About</button>
-                    <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
                     <button type="button" onClick={() => navigate('/eventslist')}> View All Events</button>
                     <button type="button" onClick={() => navigate('/account')}> Account Info</button>
                     <button type="button" onClick={logOut}> Exit</button>
+
                 </div>
             </div>
 

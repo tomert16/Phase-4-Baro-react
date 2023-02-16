@@ -3,14 +3,14 @@ import { useState, useEffect } from "react"
 import logo1 from './assets/cropped-logo1.png'
 
 
-export default function EventsList({setLoggedInUser}) {
+export default function EventsList({setLoggedInUser, loggedInUser}) {
 
     const navigate = useNavigate()
 
     function logOut(){
         // setLoggedInUser(undefined)
         // navigate('/')
-        fetch("http://localhost:3000/logout", {
+        fetch("/logout", {
             method: "DELETE",
         }).then((r) => {
             if (r.ok) {
@@ -31,7 +31,7 @@ export default function EventsList({setLoggedInUser}) {
                     <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
                     <button type="button" onClick={() => navigate('/eventslist')}> View All Events</button>
                     <button type="button" onClick={() => navigate('/account')}> Account Info</button>
-                    <button type="button" onClick={logOut}> Exit</button>
+                    <button type="button" onClick={loggedInUser ? logOut : () => navigate('/')}> Exit</button>
                 </div>
             </div>
 
