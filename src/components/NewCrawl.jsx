@@ -9,7 +9,7 @@ export default function NewCrawl({barCrawlData}){
     const [barArray, setBarArray] = useState([])
     useEffect(() => {
         const fetchBars = async () => {
-            const req = await fetch('http://localhost:3000/bars')
+            const req = await fetch('/bars')
             const res = await req.json()
             setBarArray(res)
         }        

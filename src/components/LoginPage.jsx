@@ -11,6 +11,7 @@ export default function LoginPage ({ setLoggedInUser}){
     const [userArray, setUserArray] = useState([])
     const [usernameInput, setUsernameInput] = useState("")
     const [passwordInput, setPasswordInput] = useState("")
+    const [errors, setErrors] = useState([])
 
     const [toggleLogin,  setToggleLogin] = useState(false);
     
@@ -52,6 +53,8 @@ export default function LoginPage ({ setLoggedInUser}){
             if (r.ok) {
                 r.json().then((user) => setLoggedInUser(user));
                 navigate('/home');
+            }else {
+                r.json().then(json => setErrors(json.errors))
             }
         });
     }
@@ -96,6 +99,7 @@ export default function LoginPage ({ setLoggedInUser}){
                         <button type="button" onClick={() => handleGuestLogin()}> Continue as Guest</button>
                         <br/>
                         <button className="exit-form" onClick={handleToggle}>End Your Journey</button>
+                        {errors ? <div>{errors}</div>:null}
                         </Form> 
                     </div>
                 </div>: null}

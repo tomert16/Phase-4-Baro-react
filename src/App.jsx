@@ -28,6 +28,8 @@ function App() {
     });
   },[]);
 
+  if(!setLoggedInUser)  return <LoginPage setLoggedInUser={setLoggedInUser} />
+
 
   //all the routes
   const router = createBrowserRouter([
