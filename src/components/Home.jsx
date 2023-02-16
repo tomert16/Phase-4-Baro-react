@@ -17,7 +17,7 @@ export default function Home ({setClickedBar, setBarCrawlData, setLoggedInUser, 
     //fetch all the bars 
     useEffect(() => {
         const fetchBars = async () => {
-            const req = await fetch('http://localhost:3000/bars')
+            const req = await fetch('/bars')
             const res = await req.json()
             setBarArray(res)
         }
@@ -31,7 +31,7 @@ export default function Home ({setClickedBar, setBarCrawlData, setLoggedInUser, 
 
 
     // const addCrawls = async () => {
-    //     fetch ('http://localhost:3000/crawl_list', {
+    //     fetch ('/crawl_list', {
     //         method: 'POST',
     //         headers: {
     //             'Content-Type': 'application/json'
@@ -171,7 +171,7 @@ function BarCard({type, setClickedBar, crawlArray, setCrawlArray, bar}) {
     //       // console.log(isFavorited)
     //     setIsFavorited(!isFavorited)
     // // console.log(id)
-    //     fetch(`http://localhost:3000/bars/${bar.id}`, {
+    //     fetch(`/bars/${bar.id}`, {
     //         method: "PATCH",
     //         headers: {
     //           "Content-Type": "application/json",

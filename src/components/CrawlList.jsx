@@ -4,7 +4,7 @@ import {SlArrowRight} from 'react-icons/sl'
 import logo1 from './assets/cropped-logo1.png';
 import barPhoto from './assets/another-bar-photo.jpg'
 
-export default function CrawlList({setLoggedInUser}) {
+export default function CrawlList({setLoggedInUser, loggedInUser}) {
     const navigate = useNavigate()
     const [crawlArray, setCrawlArray] = useState([])
     const [barArray, setBarArray] = useState([])
@@ -38,7 +38,7 @@ export default function CrawlList({setLoggedInUser}) {
     function logOut(){
         // setLoggedInUser(undefined)
         // navigate('/')
-        fetch("http://localhost:3000/logout", {
+        fetch("/logout", {
             method: "DELETE",
         }).then((r) => {
             if (r.ok) {
@@ -58,7 +58,7 @@ export default function CrawlList({setLoggedInUser}) {
                     <button type="button" onClick={() => navigate('/about')}> About</button>
                     <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
                     <button type="button" onClick={() => navigate('/account')}> Account Info</button>
-                    <button type="button" onClick={logOut}> Exit</button>
+                    <button type="button" onClick={loggedInUser ? logOut : () => navigate('/')}> Exit</button>
                 </div>
             </div>
             <img className="crawllist-image" src={barPhoto} />

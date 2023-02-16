@@ -20,7 +20,7 @@ export default function LoginPage ({ setLoggedInUser}){
     }
 
     const fetchUsers = async () => {
-        const req = await fetch('http://localhost:3000/users')
+        const req = await fetch('/users')
         const res = await req.json()
         setUserArray(res)
     }
@@ -31,7 +31,7 @@ export default function LoginPage ({ setLoggedInUser}){
     
    
     function handleLogin(){
-        fetch("http://localhost:3000/login", {
+        fetch("/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
