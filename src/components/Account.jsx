@@ -65,12 +65,8 @@ export default function Account ({loggedInUser, setLoggedInUser}){
 
     //filter the friends to only show the friends that belong to the logged in user
     const filteredUserFriendArray = friendArray.filter((friend) => {
-        // if (loggedInUser.id  === friend.user_1.id){
-            return loggedInUser.id === friend.user_1.id || friend.user_2.id === loggedInUser.id
-        // }
-        // else if (loggedInUser.id === friend.user_2.id){
-            // return loggedInUser.id === friend.user_2.id
-        // }
+        return loggedInUser.id === friend.user_1.id || friend.user_2.id === loggedInUser.id
+       
 
     })
 
