@@ -7,6 +7,8 @@ export default function Account ({loggedInUser}){
     //state to hold all the reviews
     const [reviewArray, setReviewArray] = useState([])
     const [friendArray, setFriendArray] = useState([])
+    const [usersArray, setUsersArray] = useState([])
+    const [toggleLookFriends, setToggleLookFriends] = useState(false);
 
     // console.log(loggedInUser);
 
@@ -30,6 +32,22 @@ export default function Account ({loggedInUser}){
     useEffect(() => {
         fetchFriend()
     }, [])
+
+    //fetch all users
+    const fetchUsers = async () => {
+        const req = await fetch('http://localhost:3000/users')
+        const res = await req.json()
+        setUsersArray(res)
+    }
+
+    useEffect(() => {
+        fetchUsers()
+    }, [])
+
+    //flip state of the lookforfriends toggle
+    const handleToggle = () => {
+        setToggleLookFriends(!toggleLookFriends);
+    }
 
 
     //stops the code from running if the fetch for the reviews hasn't finished
@@ -76,7 +94,7 @@ export default function Account ({loggedInUser}){
                 <div className="user-text">Password:  {loggedInUser.password}</div>
                 <div className="user-review-container">
                     ////////////////////////////////////////////
-                    <div className="friend-list">
+                    <div className="friend-list" >
                     <h1> Friends List</h1>
                     {/* show all of the users friends */}
                     {filteredUserFriendArray.map((friend) => {
@@ -87,8 +105,40 @@ export default function Account ({loggedInUser}){
                             loggedInUser={loggedInUser}
                         />
                     )
-                })}        
-                    </div>
+                })}
+                {/* Look for friends button/toggle */}
+                        <button
+                        className="look-for-friends-button"
+                        onClick={handleToggle}
+                        > Look for more friends
+                        </button>
+                         { toggleLookFriends ? 
+                                <div className="lookfriend-form-popup">
+                                <div className="form-div">
+                                    <div className="friends-lookup">
+            
+                                    <h3> All Users </h3>
+                                    <button className="exit-form" onClick={handleToggle}> Hide Users</button>
+                                    <br></br>
+                                    {usersArray.map((user) => {
+                                        return(
+                                            <>
+                                            <PotentialFriend user={user}/>
+                                            <button>add friend</button>
+                                            </>
+                                        )
+                                    })}
+            
+                                    </div>
+                                </div>
+            
+                            </div> 
+
+                            :
+                            null           
+                            }  
+                    
+                    </div>     
                     <h2>Your Reviews</h2>
                     {/* show all of the users reviews */}
                     {filteredUserReviewArray.map((review) => {
@@ -132,5 +182,17 @@ function UserFriendCard({friend, loggedInUser}){
         </div>
 
         
+    )
+}
+
+function PotentialFriend({user}){
+    return(
+        <div className="potential-friend-details">
+            <br></br>
+            <div className="review-real-name"> Name: {user.real_name} </div>
+            <div className="review-username"> Username: {user.username}/5</div>
+            <div className="review-email"> Email: {user.email} </div> 
+            <br></br>  
+        </div>
     )
 }
