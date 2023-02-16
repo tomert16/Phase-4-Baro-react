@@ -782,3 +782,96 @@ button{
   padding-top: 15px;
   padding-bottom: 15px;
 }
+
+/* about page */
+.about-container{
+  color: #005A9E;
+  background-color: antiquewhite;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+  height: 90vh;
+  font-family: "ultra", serif;
+}
+.about-container h1{
+  background-color: antiquewhite;
+  margin-top: 0;
+  font-size: 60px;
+}
+.about-container p{
+  background-color: antiquewhite;
+  margin-top: 0;
+  font-size: 30px;
+}
+
+#dedication{
+  background-color: antiquewhite;
+  margin-top: 0;
+  font-size: 40px;
+  font-family: 'Sacramento', cursive;
+}
+
+.about-logo{
+  height: 50%;
+
+}
+
+/* new user page */
+.new-user-div{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  background-color: #7D766B;
+  height: 100vh;
+  margin: auto;
+  
+}
+
+.create-account-form{
+  border-style: solid;
+  border-width: 4px;
+  border-color: #005A9E;
+  border-radius: 10px;
+  font-size: larger;
+  height: 30rem;
+  width: 30rem;
+  background-color:antiquewhite;
+  margin-top: 15%;
+}
+
+.create-account-form h3{
+  color: #005A9E;
+  font-size: larger;
+  font-family: 'Ultra', serif;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.create-account-form input{
+  margin-bottom: 15px;
+  height: 25px;
+}
+
+.create-account-form button{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  height: 35px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-family: 'Ultra', serif;
+  color: #005A9E;
+  background-color: aliceblue;
+  border-color: #FF4F00;
+  border-radius: 40px;
+  text-align: center;
+}
+
+.create-account-form button:hover{
+  background-color: rgb(192, 225, 255)
+}
+
+.create-account-form button:clicked{
+  background-color: rgb(192, 225, 255)
+}

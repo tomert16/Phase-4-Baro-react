@@ -23,19 +23,21 @@ export default function About({setLoggedInUser}){
 
     return(
         <div className="about-page">
-                        <div className="header-div">
+            <div className="header-div">
                 <img className="header-logo" src={logo1} onClick={() => navigate('/home')}/>
                 <div className="nav-bar">
                     <button type="button" onClick={() => navigate('/about')}> About</button>
                     <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
-                    <button type="button" onClick={() => navigate('/eventslist')}> View All Events</button>
+                    <button type="button" onClick={() => navigate('/eventslist')}>View All Events</button>
                     <button type="button" onClick={() => navigate('/account')}> Account Info</button>
                     <button type="button" onClick={logOut}> Exit</button>
                 </div>
             </div>
-            <h1>BarO </h1>
-            <p>A phase 3 and 4 project made by Olivia, Tomer, James P, Daiel, and Avi</p>
-            <button type="button" onClick={() => navigate('/home')}> Home</button>
+            <div className="about-container">
+            <img className="about-logo" src={logo1} />
+            <p>A phase 3 and 4 project made by Avi, Daniel, Olivia, and Tomer.</p> 
+            <p id="dedication">Dedicated to: James P</p>
+            </div>
         </div>        
     )
 }

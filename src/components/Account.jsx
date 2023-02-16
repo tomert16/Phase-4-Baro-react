@@ -105,7 +105,8 @@ export default function Account ({loggedInUser, setLoggedInUser}){
                 <img className="header-logo" src={logo1} onClick={() => navigate('/home')}/>
                 <div className="nav-bar">
                     <button type="button" onClick={() => navigate('/about')}> About</button>
-                    <button type="button" onClick={() => navigate('/eventslist')}> View All Events</button>
+                    <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
+                    <button type="button" onClick={() => navigate('/eventslist')}>View All Events</button>
                     <button type="button" onClick={() => navigate('/account')}> Account Info</button>
                     <button type="button" onClick={logOut}> Exit</button>
 
@@ -142,7 +143,7 @@ export default function Account ({loggedInUser, setLoggedInUser}){
                 </div>
             </div>
                 <div className="friend-list">                   
-                    <h1> Friends List</h1>
+                    <h1 className="friend-list-title"> Friends List</h1>
 
                     {/* show all of the users friends */}
                     {filteredUserFriendArray.map((friend) => {
@@ -187,19 +188,6 @@ export default function Account ({loggedInUser, setLoggedInUser}){
                             :
                             null           
                             }  
-                    
-                    <h2>Your Reviews</h2>
-                    {/* show all of the users reviews */}
-                    {filteredUserReviewArray.map((review) => {
-                    return (
-                        <UserReviewCard
-                            key={review.bar_id}
-                            review={review}
-                            bar={review.bar}
-                        />
-                    )
-                })}                    
-
                 </div>
             </div>
             </div>
