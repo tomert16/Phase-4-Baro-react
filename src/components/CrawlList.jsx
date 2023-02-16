@@ -13,13 +13,13 @@ export default function CrawlList({setLoggedInUser}) {
     //fetch the array of all the crawls
     useEffect(() => {
         const fetchCrawls = async () => {
-            const req = await fetch('http://localhost:3000/bar_crawls')
+            const req = await fetch('/bar_crawls')
             const res = await req.json()
             setCrawlArray(res)
         }
 
         const fetchBars = async () => {
-            const req = await fetch('http://localhost:3000/bars')
+            const req = await fetch('/bars')
             const res = await req.json()
             setBarArray(res)        
         }

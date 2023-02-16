@@ -18,7 +18,7 @@ export default function BarInfo({clickedBar, loggedInUser, setLoggedInUser}){
         
 
        const fetchReviews = async () => {
-           const req = await fetch('http://localhost:3000/reviews')
+           const req = await fetch('/reviews')
            const res = await req.json()
            setReviewArray(res)
        }

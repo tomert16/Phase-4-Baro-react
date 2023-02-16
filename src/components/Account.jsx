@@ -12,7 +12,7 @@ export default function Account ({loggedInUser}){
 
     //fetch all the reviews
     const fetchReviews = async () => {
-        const req = await fetch('http://localhost:3000/reviews')
+        const req = await fetch('/reviews')
         const res = await req.json()
         setReviewArray(res)
     }
