@@ -39,7 +39,6 @@ button{
 .start-btn{
   display: flex;
   flex-direction: column;
-  /* align-self: center; */
   text-align: center;
   font-family: 'Ultra', serif;
   font-size: 12pt;
@@ -214,7 +213,6 @@ button{
 
 /* bar crawl carousel and buttons */
 .bar-crawl-button{
-  /* text-align: center; */
   font-family: 'Ultra', serif;
   font-size: 12pt;
   color:#005A9E;
@@ -292,7 +290,6 @@ button{
   border-radius: 3px;
   border-color: transparent;
   height: fit-content;
-  /* width: 70%; */
   text-align: center;
   cursor: pointer;
   position: relative;
@@ -386,7 +383,6 @@ button{
   font-family:"Ultra", serif;
   position: relative;
   bottom: 50pc;
-  /* background-color: transparent; */
   text-shadow: 5px 5px 5px #005A9E;
   margin-top: 25pc;
 }
@@ -452,7 +448,6 @@ button{
   margin-left: 10px;
   margin-right: 10px;
   background-color: aliceblue;
-  /* font-family: "Ultra", serif; */
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   padding-bottom: 10px;
   padding-left: 10px;
@@ -480,9 +475,7 @@ button{
 }
 
 .crawl-reviews{
-  /* justify-content: center; */
   align-items: center;
-  /* position: absolute; */
   display: flex;
   flex-direction: column;
   border-style: solid;
@@ -505,7 +498,6 @@ button{
 }
 
 .crawl-reviews button{
-  /* margin: auto; */
   height: 35px;
   width: 175px;
   margin-top: 50px;
@@ -514,7 +506,6 @@ button{
   padding-right: 12px;
   font-family: 'Ultra', serif;
   color: #005A9E;
-  /* align-self: center; */
   background-color: aliceblue;
   border-color: #FF4F00;
   border-radius: 40px;
@@ -590,8 +581,9 @@ button{
   display: flex;
   flex-direction: column;
   width: 40%;
-  color:rgb(2, 67, 172);
+  color:#005A9E;
   text-align: left;
+  padding-right: 15px;
 }
 
 .bar-info-category{
@@ -627,20 +619,18 @@ button{
 }
 #reviews{
   font-family: "Ultra", serif;
-  color:rgb(2, 67, 172);
+  color:#005A9E;
   font-size: 30px;
   padding-right: 10%;
 }
 
 .scroll-reviews{
   height: 70%;
-  /* padding-right: 10%; */
   overflow-y: scroll;
 }
 
 .bar-review-card{
   padding: 15px;
-  /* border-bottom: solid #ff51001c; */
   padding-left: 45px;
 }
 .review-author{
@@ -665,6 +655,7 @@ button{
   padding-right: 10%;
 }
 
+/* bar info write a review form */
 .write-a-review-container{
   display: flex;
   flex-direction: column;
@@ -722,4 +713,72 @@ button{
   color:#FF4F00;
   font-size: 30px;
   padding: 30px
+}
+
+/* account info page */
+.account-info-page{
+  background-color: antiquewhite;
+  height: 100vh;
+}
+
+.user-info-title{
+  font-family: "ultra", serif;
+  font-size: 25px;
+  margin-left: 40px;
+}
+
+.user-info-detail{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 20px;
+  margin-left: 40px;
+  margin-top: 0;
+}
+
+.your-reviews{
+  font-family: "Ultra", serif;
+  color:#005A9E;
+  font-size: 30px;
+  padding-right: 10%;
+}
+
+.user-review-container{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  border-left:solid #ff51001c;
+  text-align: right;
+}
+
+.user-review-bar{
+  font-family: "ultra", serif;
+  font-size: medium;
+  padding-right: 10%;
+  padding-bottom: 8px;
+}
+
+.user-review-rating{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: medium;
+  padding-right: 10%;
+  padding-bottom: 8px;
+
+}
+
+.user-review-body{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: medium;
+  text-align: right;
+  padding-right: 10%;
+}
+
+.friend-list-title{
+  display:flex;
+  justify-content: center;
+  font-family: "Ultra", serif;
+  font-size: 30px;
+  color: #005A9E;
+  background-color: aliceblue;
+  margin-top: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
