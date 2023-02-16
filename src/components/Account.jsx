@@ -140,11 +140,7 @@ export default function Account ({loggedInUser, setLoggedInUser}){
                     </div>
                 </div>
             </div>
-                <div className="friend-list">
-                    <h1 className="friend-list-title"> Friends List</h1>
-
-                    ////////////////////////////////////////////
-                    <div className="friend-list" >
+                <div className="friend-list">                   
                     <h1> Friends List</h1>
 
                     {/* show all of the users friends */}
@@ -191,7 +187,6 @@ export default function Account ({loggedInUser, setLoggedInUser}){
                             null           
                             }  
                     
-                    </div>     
                     <h2>Your Reviews</h2>
                     {/* show all of the users reviews */}
                     {filteredUserReviewArray.map((review) => {
