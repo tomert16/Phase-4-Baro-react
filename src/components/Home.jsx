@@ -90,6 +90,7 @@ export default function Home ({setClickedBar, setBarCrawlData, setLoggedInUser, 
                 <div className="nav-bar">
                     <button type="button" onClick={() => navigate('/about')}> About</button>
                     <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
+                    <button type="button" onClick={() => navigate('/eventslist')}> View All Events</button>
                     <button type="button" onClick={() => navigate('/account')}> Account Info</button>
                     <button type="button" onClick={logOut}> Exit</button>
                 </div>

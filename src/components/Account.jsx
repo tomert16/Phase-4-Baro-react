@@ -25,7 +25,6 @@ export default function Account ({loggedInUser}){
         const req = await fetch('http://localhost:3000/friendship_tables')
         const res = await req.json()
         setFriendArray(res)
-        console.log(res)
     }
     useEffect(() => {
         fetchFriend()

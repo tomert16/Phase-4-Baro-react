@@ -88,7 +88,7 @@ export default function BarInfo({clickedBar, loggedInUser, setLoggedInUser}){
                     <h2 className="bar-info-category">{clickedBar.category}</h2>
                     <h2 className="bar-info-location">{clickedBar.location}</h2>
                     <h2 className="bar-info-price">{clickedBar.price}</h2>
-                    <h2 className="bar-info-closing-time">Closing Time: {clickedBar.closing_time}</h2>
+                    <h2 className="bar-info-closing-time">Closing Time: {(clickedBar.closing_time)}</h2>
                 </div>
                 {/* show all of the reviews for this bar */}
                 <div className="bar-reivew-container">
@@ -113,6 +113,30 @@ export default function BarInfo({clickedBar, loggedInUser, setLoggedInUser}){
     )
 }
 
+
+// function convert24to12(time) {
+//     console.log(time.toString().length)
+
+//     if (time.toString().length === 3){
+//         let myFunc = num => Number(num);      
+//         var intArr = Array.from(String(time), myFunc);
+
+//         intArr.splice(1,0,":")
+//         let newTime = intArr.toString()
+//         console.log( newTime  )
+
+//         let fourDigitTime = time.toString()
+//         fourDigitTime = "0" + fourDigitTime
+//         // console.log(parseInt(fourDigitTime))
+//     } else {
+//         var hours24 = parseInt(time.substring(0,2));
+//         var hours = ((hours24 + 11) % 12) + 1;
+//         var amPm = hours24 > 11 ? 'pm' : 'am';
+//         var minutes = time.substring(2);
+
+//         return hours + ':' + minutes + amPm;
+//     }
+// }
 
 
 
