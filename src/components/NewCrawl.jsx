@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Form } from "semantic-ui-react";
 
-export default function NewCrawl({barCrawlData}){
+export default function NewCrawl({barCrawlData, loggedInUser}){
+
+    const [barCrawlNameInput, setBarCrawlNameInput] = useState("")
 
     const navigate = useNavigate()
+
     
     //fetch all the bars 
     const [barArray, setBarArray] = useState([])
@@ -38,15 +42,25 @@ export default function NewCrawl({barCrawlData}){
 
     return(
         <div>
-            <h1>Here you can see the bars in your crawl</h1>
             <button type="button" onClick={() => navigate('/home')}> Home </button>
+            <h1>Here is what your new crawl looks like {loggedInUser.real_name}</h1>
             {barCrawlArray.map((bar) => {
                 //udpate the number of the bar in the crawl
                 barCrawlNumber += 1
                 return(
-                    <CrawlBar bar={bar} barCrawlNumber={barCrawlNumber} totalCrawlBars={totalCrawlBars}/>
+                    <CrawlBar 
+                        bar={bar} 
+                        barCrawlNumber={barCrawlNumber} 
+                        totalCrawlBars={totalCrawlBars}
+                    />
                 )
             })}
+            <NewCrawlSaveForm 
+                barCrawlString={barCrawlString} 
+                barCrawlNameInput={barCrawlNameInput}
+                setBarCrawlNameInput={setBarCrawlNameInput}
+                loggedInUser={loggedInUser}
+            />
         </div>
     )
 }
@@ -70,6 +84,50 @@ function CrawlBar({bar, barCrawlNumber, totalCrawlBars}){
                 {grammerForDisplayingCarwlBarSequence(barCrawlNumber, totalCrawlBars)} 
                 {bar[0].name} at {bar[0].location}
             </h3>
+        </div>
+    )
+}
+
+
+function handleReviewSubmit(barCrawlString, barCrawlNameInput, loggedInUser){
+
+    const formData ={
+        bar_crawl_bars_id: barCrawlString,
+        bar_crawl_name: barCrawlNameInput,
+        user_id: loggedInUser.id,
+        public_private: true
+    }
+    fetch ('http://localhost:3000/bar_crawls', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData),
+        })
+    .then(res => res.json())
+}
+
+
+function NewCrawlSaveForm({barCrawlString, barCrawlNameInput, setBarCrawlNameInput, loggedInUser}){
+
+    return(
+        <div>
+            <h1>Save your crawl</h1>
+            <Form 
+                className="review-form" 
+                onSubmit={(e) => {
+                    e.preventDefault()
+                    handleReviewSubmit(barCrawlString, barCrawlNameInput, loggedInUser)
+                }}
+            >
+                <Form.Input fluid 
+                    placeholder="Crawl Name"
+                    value={barCrawlNameInput}
+                    autoComplete="off"
+                    onChange={(e) => setBarCrawlNameInput(e.target.value)} 
+                />
+                <Form.Button type="submit">Save Crawl</Form.Button>
+            </Form>
         </div>
     )
 }
