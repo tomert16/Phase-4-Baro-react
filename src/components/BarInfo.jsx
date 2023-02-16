@@ -107,7 +107,11 @@ export default function BarInfo({clickedBar, loggedInUser, setLoggedInUser}){
             </div>    
             </div>
             {/* form to write a review */}
+            <div className="write-a-review-container">
+
             <BarReviewForm clickedBar={clickedBar} loggedInUser={loggedInUser} reviewArray={reviewArray} setReviewArray={setReviewArray}/>
+
+            </div>
             <br></br>
         </div>
     )
@@ -251,11 +255,11 @@ function BarReviewForm ({loggedInUser, reviewArray, setReviewArray, clickedBar})
                     e.preventDefault();
                     postReview()
                 }}>
-                    <h3>Write a Review</h3>
+                    <h3 className="write-a-review-title">Write a Review</h3>
                     <h5>By {loggedInUser.username}</h5>
-                    <Form.Input fluid placeholder="Score" onChange={(e) => setReviewScore(e.target.value)}/>
-                    <Form.Input fluid placeholder="Content" onChange={(e) => setReviewContent(e.target.value)}/>
-                    <Form.Button type="submit">Post Review</Form.Button>
+                    <Form.Input id="rating" fluid placeholder="Rating out of 5" onChange={(e) => setReviewScore(e.target.value)}/>
+                    <Form.Input id="review-content" fluid placeholder="Content" onChange={(e) => setReviewContent(e.target.value)}/>
+                    <Form.Button id="submit-review" type="submit">Post Review</Form.Button>
                 </Form>
             </div>
         )

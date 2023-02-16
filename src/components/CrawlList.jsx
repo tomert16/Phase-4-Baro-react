@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {SlArrowRight} from 'react-icons/sl'
-import logo1 from './assets/cropped-logo1.png'
+import logo1 from './assets/cropped-logo1.png';
+import barPhoto from './assets/another-bar-photo.jpg'
 
 export default function CrawlList({setLoggedInUser}) {
     const navigate = useNavigate()
@@ -60,7 +61,7 @@ export default function CrawlList({setLoggedInUser}) {
                     <button type="button" onClick={logOut}> Exit</button>
                 </div>
             </div>
-            <img className="crawllist-image" src="src/assets/another-bar-photo.jpg" />
+            <img className="crawllist-image" src={barPhoto} />
             <h1 className="crawllist-page-title">Browse Existing Bar Crawls</h1>
 
 
