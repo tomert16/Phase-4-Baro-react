@@ -3,6 +3,8 @@ import { useState,  useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { MdFavorite, MdOutlineFavoriteBorder } from 'react-icons/md';
 import {SlArrowRight} from 'react-icons/sl'
+import logo1 from './assets/cropped-logo1.png'
+
 
 
 export default function Home ({setClickedBar, setBarCrawlData, setLoggedInUser, loggedInUser}){
@@ -10,6 +12,7 @@ export default function Home ({setClickedBar, setBarCrawlData, setLoggedInUser, 
     //states list 
     const [barArray, setBarArray] = useState([])
     const [crawlArray, setCrawlArray] = useState([])
+
 
     //fetch all the bars 
     useEffect(() => {
@@ -82,11 +85,14 @@ export default function Home ({setClickedBar, setBarCrawlData, setLoggedInUser, 
         <div className="homepage">
             {/* Test Buttons */}
 
-            <div className="nav-bar">
-                <button type="button" onClick={() => navigate('/about')}> About</button>
-                <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
-                <button type="button" onClick={() => navigate('/account')}> Account Info</button>
-                <button type="button" onClick={logOut}> Exit</button>
+            <div className="header-div">
+                <img className="header-logo" src={logo1} onClick={() => navigate('/home')}/>
+                <div className="nav-bar">
+                    <button type="button" onClick={() => navigate('/about')}> About</button>
+                    <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
+                    <button type="button" onClick={() => navigate('/account')}> Account Info</button>
+                    <button type="button" onClick={logOut}> Exit</button>
+                </div>
             </div>
             <img className="home-image" src="https://citizenside.com/wp-content/uploads/2022/12/bar-hopping-1-1170x780.jpg" />
             <h1 className="title">Baro</h1>

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import {createBrowserRouter,RouterProvider,} from "react-router-dom";
 import LoginPage from "./components/LoginPage"
@@ -20,10 +19,12 @@ function App() {
 
   // useEffect for auto-login
   useEffect(() => {
-    fetch("/me")
+    fetch("http://localhost:3000/me")
     .then((r) => {
       if (r.ok) {
         r.json().then((user) => setLoggedInUser(user));
+      } else {
+        setLoggedInUser(null)
       }
     });
   },[]);
@@ -42,7 +43,7 @@ function App() {
       />
     },
     {
-      path: "/newuser",
+      path: "newuser",
       element: <NewUser 
         loggedInUser={loggedInUser} 
         setLoggedInUser={setLoggedInUser}
@@ -66,6 +67,7 @@ function App() {
       element: <BarInfo
         clickedBar={clickedBar}
         loggedInUser={loggedInUser}
+        setLoggedInUser={setLoggedInUser}
       />
     },
     {
@@ -78,11 +80,14 @@ function App() {
       path: "/newcrawl",
       element: <NewCrawl
         barCrawlData={barCrawlData}
+        loggedInUser={loggedInUser}
       />
     },
     {
       path: "/crawllist",
-      element: <CrawlList/>
+      element: <CrawlList
+        setLoggedInUser={setLoggedInUser}
+      />
     }
   ])
   return (
