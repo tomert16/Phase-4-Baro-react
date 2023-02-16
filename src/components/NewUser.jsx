@@ -24,7 +24,7 @@ export default function NewUser({ setLoggedInUser }) {
             password: passwordInput,
             password_confirmation: confirmPasswordInput
         }
-        fetch('/signup', {
+        fetch('http://localhost:3000/signup', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

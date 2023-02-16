@@ -2,8 +2,10 @@
 import { useState,  useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 import { Form } from "semantic-ui-react";
+import logo1 from './assets/cropped-logo1.png'
 
-export default function BarInfo({clickedBar, loggedInUser}){
+
+export default function BarInfo({clickedBar, loggedInUser, setLoggedInUser}){
 
     
     const navigate = useNavigate()
@@ -48,36 +50,93 @@ export default function BarInfo({clickedBar, loggedInUser}){
     //     console.log("Edit Complete:", updatedReview)
      }
     
+    //function to log out by setting the state of the logged in user to undefined
+     //and navigating back to the login page
+    function logOut(){
+        // setLoggedInUser(undefined)
+        // navigate('/')
+        fetch("http://localhost:3000/logout", {
+            method: "DELETE",
+        }).then((r) => {
+            if (r.ok) {
+                setLoggedInUser(null)
+                navigate('/')
+            }
+        })
+     }
     
     return(
         <div className="bar-info-page">
-            <button type="button" onClick={() => navigate('/home')}> Home</button>
+
+            <div className="header-div">
+                <img className="header-logo" src={logo1} onClick={() => navigate('/home')}/>
+                <div className="nav-bar">
+                    <button type="button" onClick={() => navigate('/about')}> About</button>
+                    <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
+                    <button type="button" onClick={() => navigate('/account')}> Account Info</button>
+                    <button type="button" onClick={logOut}> Exit</button>
+                </div>
+            </div>
+
             {/* info about the bar */}
-            <h1 className="bar-info-name">{clickedBar.name}</h1>
-            <img className="bar-info-image" src={clickedBar.image} alt={clickedBar.name}/>
-            <h2 className="bar-info-rating">{clickedBar.rating}</h2>
-            <h2 className="bar-info-category">{clickedBar.category}</h2>
-            <h2 className="bar-info-location">{clickedBar.location}</h2>
-            <h2 className="bar-info-price">{clickedBar.price}</h2>
-            <h2 className="bar-info-closing-time">{clickedBar.closing_time}</h2>
+            <div className="bar-info-container">
+                    <h1 className="bar-info-name">{clickedBar.name}</h1>
+                    <img className="bar-info-image" src={clickedBar.image} alt={clickedBar.name}/>
+                    {/* <h2 className="bar-info-rating">{clickedBar.rating}</h2> */}
+            <div className="details-reviews-container">
+                <div className="bar-info-details">
+                    <h2 className="bar-info-category">{clickedBar.category}</h2>
+                    <h2 className="bar-info-location">{clickedBar.location}</h2>
+                    <h2 className="bar-info-price">{clickedBar.price}</h2>
+                    <h2 className="bar-info-closing-time">Closing Time: {(clickedBar.closing_time)}</h2>
+                </div>
+                {/* show all of the reviews for this bar */}
+                <div className="bar-reivew-container">
+                    <h3 id="reviews">Reviews</h3>
+                    <div className="scroll-reviews">
+                    {filteredReviewArray.map((review) => {
+                        return (
+                            <BarReviewCard                        
+                                review={review}                        
+                            />
+                            )
+                        })}
+
+                    </div>
+                </div>
+            </div>    
+            </div>
             {/* form to write a review */}
-            <h3>Reviews</h3>
             <BarReviewForm clickedBar={clickedBar} loggedInUser={loggedInUser} reviewArray={reviewArray} setReviewArray={setReviewArray}/>
             <br></br>
-            {/* show all of the reviews for this bar */}
-            <div className="bar-reivew-container">
-                {filteredReviewArray.map((review) => {
-                    return (
-                        <BarReviewCard                        
-                            review={review}                        
-                        />
-                        )
-                    })}
-            </div>
         </div>
     )
 }
 
+
+// function convert24to12(time) {
+//     console.log(time.toString().length)
+
+//     if (time.toString().length === 3){
+//         let myFunc = num => Number(num);      
+//         var intArr = Array.from(String(time), myFunc);
+
+//         intArr.splice(1,0,":")
+//         let newTime = intArr.toString()
+//         console.log( newTime  )
+
+//         let fourDigitTime = time.toString()
+//         fourDigitTime = "0" + fourDigitTime
+//         // console.log(parseInt(fourDigitTime))
+//     } else {
+//         var hours24 = parseInt(time.substring(0,2));
+//         var hours = ((hours24 + 11) % 12) + 1;
+//         var amPm = hours24 > 11 ? 'pm' : 'am';
+//         var minutes = time.substring(2);
+
+//         return hours + ':' + minutes + amPm;
+//     }
+// }
 
 
 
@@ -113,7 +172,7 @@ function BarReviewCard({review}){
         <div className="bar-review-card">
             <div className="review-author">{review.username}</div>
             <div className="review-rating">{review.star_rating}/5 Stars</div>
-            <div className="review-body">{review.content}</div>     
+            <div className="bar-review-body">{review.content}</div>     
             {/* <button className="edit-button" onClick={handleEditToggle}>Edit</button>  */}
             {/* {toggleEdit ? <form className="edt-form" onSubmit={handleReviewEdit}>
                 <input  

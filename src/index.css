@@ -167,6 +167,12 @@ button{
   background-color: antiquewhite;
 }
 
+.header-logo:hover{
+  opacity: 0.3;
+  background-color: aliceblue;
+  border-radius: 40px;
+}
+
 /* home page */
 .homepage{
   display: flex;
@@ -534,4 +540,127 @@ button{
 }
 .review-detail{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;;
+}
+
+/* bar info page */
+.bar-info-page{
+  background-color: antiquewhite;
+}
+
+.bar-info-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: aliceblue;
+  width: 80%;
+  margin-left: 10%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.bar-info-name{
+  display:flex;
+  justify-content: center;
+  font-family: "Ultra", serif;
+  font-size: 40px;
+  color: #005A9E;
+  background-color: aliceblue;
+  margin-top: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.bar-info-image{
+  margin-bottom: 0%;
+
+}
+
+/* .bar-info-rating{
+  width: 80%;
+  background-color: aliceblue;
+} */
+
+
+.details-reviews-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.bar-info-details{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  color:rgb(2, 67, 172);
+  text-align: left;
+}
+
+.bar-info-category{
+  font-family: "Ultra", serif;
+  font-size: 30px;
+  padding-left: 10%;
+}
+
+.bar-info-location{
+  font-family: "Ultra", serif;
+  font-size: 30px;
+  padding-left: 10%;
+}
+
+.bar-info-price{
+  font-family: "Ultra", serif;
+  font-size: 30px;
+  padding-left: 10%;
+}
+
+.bar-info-closing-time{
+  font-family: "Ultra", serif;
+  font-size: 30px;
+  padding-left: 10%;
+}
+
+.bar-reivew-container{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  border-left:solid #ff51001c;
+  text-align: right;
+}
+#reviews{
+  font-family: "Ultra", serif;
+  color:rgb(2, 67, 172);
+  font-size: 30px;
+  padding-right: 10%;
+}
+
+.scroll-reviews{
+  height: 70%;
+  /* padding-right: 10%; */
+  overflow-y: scroll;
+}
+
+.bar-review-card{
+  padding: 15px;
+  /* border-bottom: solid #ff51001c; */
+  padding-left: 45px;
+}
+.review-author{
+  font-family: "ultra", serif;
+  font-size: medium;
+  padding-right: 10%;
+  padding-bottom: 8px;
+}
+
+.review-rating{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: medium;
+  padding-right: 10%;
+  padding-bottom: 8px;
+
+}
+
+.bar-review-body{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: medium;
+  text-align: right;
+  padding-right: 10%;
 }
