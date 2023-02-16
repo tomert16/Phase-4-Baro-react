@@ -716,3 +716,10 @@ button{
   width: 60%;
   text-align: top;
 }
+
+.review-no-login{
+  font-family: "Ultra", serif;
+  color:#FF4F00;
+  font-size: 30px;
+  padding: 30px
+}
