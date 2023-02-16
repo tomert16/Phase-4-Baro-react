@@ -14,13 +14,13 @@ export default function CrawlList({setLoggedInUser}) {
     //fetch the array of all the crawls
     useEffect(() => {
         const fetchCrawls = async () => {
-            const req = await fetch('http://localhost:3000/bar_crawls')
+            const req = await fetch('/bar_crawls')
             const res = await req.json()
             setCrawlArray(res)
         }
 
         const fetchBars = async () => {
-            const req = await fetch('http://localhost:3000/bars')
+            const req = await fetch('/bars')
             const res = await req.json()
             setBarArray(res)        
         }
@@ -72,6 +72,7 @@ export default function CrawlList({setLoggedInUser}) {
                             key={crawl.id}
                             crawl={crawl}
                             barArray={barArray}
+                            navigate={navigate}
                         />
                     )
                 })}
@@ -81,7 +82,7 @@ export default function CrawlList({setLoggedInUser}) {
 }
 
 //function to show an individual crawl
-function BarCrawl({crawl, barArray}){   
+function BarCrawl({crawl, barArray, navigate}){   
 
     //state to toggle showing the review popup
     const [toggleReviews,  setToggleReviews] = useState(false);
@@ -101,6 +102,10 @@ function BarCrawl({crawl, barArray}){
     //flip the state of the review toggle
     const handleToggle = () => {
         setToggleReviews(!toggleReviews);
+    }
+
+    const makeEvent = () => {
+        navigate('/createeventspage', {state: {crawl: crawl}})
     }
     
 
@@ -128,18 +133,16 @@ function BarCrawl({crawl, barArray}){
                 <div className="form-popup">
                     <div className="form-div">
                         <div className="crawl-reviews">
-
-                        <h3>{crawl.bar_crawl_name} Reviews</h3>
-                        {/* if we have no reviews tell the user that */}
-                        {crawl.bar_crawl_reviews.length === 0 ? <div> No Reviews Yet</div> : null}
-                        {/* show each review */}
-                        {crawl.bar_crawl_reviews.map((review) => {
-                            return(
-                                <CrawlReview review={review}/>
-                            )
-                        })}
-                        <button className="exit-form" onClick={handleToggle}> Hide Reviews</button>
-
+                            <h3>{crawl.bar_crawl_name} Reviews</h3>
+                            {/* if we have no reviews tell the user that */}
+                            {crawl.bar_crawl_reviews.length === 0 ? <div> No Reviews Yet</div> : null}
+                            {/* show each review */}
+                            {crawl.bar_crawl_reviews.map((review) => {
+                                return(
+                                    <CrawlReview review={review}/>
+                                )
+                            })}
+                            <button className="exit-form" onClick={handleToggle}> Hide Reviews</button>
                         </div>
                     </div>
 
@@ -147,7 +150,9 @@ function BarCrawl({crawl, barArray}){
                 : 
                 null
             }
-
+            <button className="bar-crawl-review-button" onClick={makeEvent}>
+                Make Crawl into an Event
+            </button>
         </div>
     )
 }
