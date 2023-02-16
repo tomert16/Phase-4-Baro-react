@@ -51,11 +51,12 @@ export default function NewUser({ setLoggedInUser }) {
             <Form.Input fluid placeholder="Email" value={emailInput} onChange={(e) => setEmailInput(e.target.value)}/>
             <Form.Input fluid type="password" value={passwordInput} placeholder="Password" onChange={(e) => setPasswordInput(e.target.value)}/>
             <Form.Input fluid type="password" value={confirmPasswordInput} placeholder="Confirm Password" onChange={(e) => setConfirmPasswordInput(e.target.value)}/>
-            <Form.Button type="submit">Create an Acount</Form.Button>
+            <Form.Button type="submit">Create an Account</Form.Button>
             <br/>
             </Form> 
             <button className="exit-form" onClick={() => navigate('/')}>Back</button>
         </div>        
     )
 }
+
 
