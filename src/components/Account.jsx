@@ -64,13 +64,7 @@ export default function Account ({loggedInUser}){
 
     //filter the friends to only show the friends that belong to the logged in user
     const filteredUserFriendArray = friendArray.filter((friend) => {
-        // if (loggedInUser.id  === friend.user_1.id){
             return loggedInUser.id === friend.user_1.id || friend.user_2.id === loggedInUser.id
-        // }
-        // else if (loggedInUser.id === friend.user_2.id){
-            // return loggedInUser.id === friend.user_2.id
-        // }
-
     })
 
     //if the user is not logged in, don't show and info on this page and tell them to log in
@@ -93,7 +87,6 @@ export default function Account ({loggedInUser}){
                 <div className="user-text">Display Name:  {loggedInUser.username}</div>
                 <div className="user-text">Password:  {loggedInUser.password}</div>
                 <div className="user-review-container">
-                    ////////////////////////////////////////////
                     <div className="friend-list" >
                     <h1> Friends List</h1>
                     {/* show all of the users friends */}
