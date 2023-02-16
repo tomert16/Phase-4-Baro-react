@@ -1,13 +1,537 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body{
+  margin: 0px
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+button{
+  cursor: pointer;
+}
+
+.header-logo {
+  height: 200px;
+  width: 200px;
+  z-index: 100;
+
+}
+
+/* load-up page */
+.login-background{
+  background-color: antiquewhite;
+  height: 100vh;
+  padding:0;
+  margin:0;
+}
+
+.login-div{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  background-color: antiquewhite;
+}
+
+.logo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60rem;
+}
+
+.start-btn{
+  display: flex;
+  flex-direction: column;
+  /* align-self: center; */
+  text-align: center;
+  font-family: 'Ultra', serif;
+  font-size: 12pt;
+  color:#005A9E;
+  height: 60px;
+  width: 175px;
+  padding-top: 6px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: aliceblue;
+  border-color: #FF4F00;
+  border-radius: 40px;
+}
+
+.start-btn:hover{
+  background-color: rgb(192, 225, 255);
+}
+
+/* login form */
+.form-popup{
+  background: rgba(0,0,0,.5);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.form-div{
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 33%;
+  left: 35%;
+  width: 28%;
+  background-color: transparent;
+}
+
+.login-form{
+  border-style: solid;
+  border-width: 4px;
+  border-color: #005A9E;
+  border-radius: 10px;
+  font-size: larger;
+  height: 30rem;
+  background-color: antiquewhite;
+}
+
+.login-form h3{
+  color: #005A9E;
+  font-size: larger;
+  font-family: 'Ultra', serif;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.login-form input{
+  margin-bottom: 15px;
+  height: 25px;
+}
+
+.login-form button{
+  margin-bottom: 15px;
+  height: 35px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-family: 'Ultra', serif;
+  color: #005A9E;
+
+  background-color: aliceblue;
+  border-color: #FF4F00;
+  border-radius: 40px;
+  text-align: center;
+}
+
+.login-form button:hover{
+  background-color: rgb(192, 225, 255)
+}
+
+/* nav bar */
+.header-div{
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding-bottom: 8px;
+  background-color: antiquewhite;
+
+}
+
+.nav-bar{
+  justify-content: center;
+  display: flex;
+  position: sticky;
+  padding-top: 15px;
+  padding-right: 30px;
+  gap: 5em;
+  background-color: antiquewhite;
+  z-index: 100;
+}
+
+.nav-bar > button{
+  font-family: "Ultra", serif;
+  border-color: transparent;
+  font-size: 20px;
+  color:#FF4F00;
+  background-color: transparent;
+  text-shadow: 3px 3px 3px rgb(248, 242, 234);
+}
+
+.nav-bar > button:hover{
+  opacity: 0.3;
+  background-color: aliceblue;
+  border-radius: 40px;
+}
+
+.header-logo {
+  height: 8rem;
+  width: 8rem;
+  padding-top: 10px;
+  padding-left: 30px;
+  background-color: antiquewhite;
+}
+
+/* home page */
+.homepage{
+  display: flex;
+  flex-direction: column;
+  background-color: antiquewhite;
+}
+
+.title{
+  color: rgb(246, 247, 248);
+  text-align: center;
+  font-size: 15pc;
+  font-family:"Ultra", serif;
+  position: relative;
+  bottom: 50pc;
+  background-color: transparent;
+  text-shadow: 5px 5px 5px #005A9E;
+}
+
+.home-image{
+  width: 100%;
+  height: 70pc;
+}
+
+.welcome-message{
+  font-family:"Ultra", serif;
+  position: relative;
+  text-align: center;
+  bottom: 25pc;
+  font-size: 60px;
+  color: #005A9E;
+}
+
+.description{
+  font-size: 40px;
+  overflow: hidden;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+/* bar crawl carousel and buttons */
+.bar-crawl-button{
+  /* text-align: center; */
+  font-family: 'Ultra', serif;
+  font-size: 12pt;
+  color:#005A9E;
+  height: 60px;
+  width: 175px;
+  padding-top: 12px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: aliceblue;
+  border-color: #FF4F00;
+  border-radius: 40px;
+  margin-left: 40px;
+  margin-top: 10px;
+}
+
+.bar-crawl-button:hover{
+  background-color: rgb(192, 225, 255)
+}
+
+.bar-crawl-container{
+  margin-top: -200px;
+  padding-left: 100px;
+  padding-right: 80px;
+}
+  .bar-crawl-list{
+  display: flex;
+  margin: 10px;
+  gap: 10em;
+  overflow-x: scroll;
+  background-color:rgba(192, 225, 255, 0.308);
+}
+
+.crawl-card img{
+  height: 250px;
+  width: 250px;
+  margin-left: 50px;
+  border-radius: .5rem;
+}
+
+.crawl-card-info{
+  text-align:  center;
+  display: grid;
+  position: relative;
+  margin-left: 50px;
+  top: 8em;
+  font-size: large;
+  font-family:"Ultra", serif;
+  height: 3em;
+  color: #005A9E;
+}
+
+.crawl-arrow{
+  position: relative;
+  left: 117%;
+  bottom: 40%;
+  background-color: transparent;
+}
+
+/* mapped bars */
+.bar-container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(auto, 1fr);
+  align-items: stretch;
+  gap: 1em;
+  margin-left: 5%;
+  margin-top: 5%;
+  margin-right: 5%;
+  margin-bottom: 5%;
+}
+
+.bar-card{
+  border-style: solid;
+  border-radius: 3px;
+  border-color: transparent;
+  height: fit-content;
+  /* width: 70%; */
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  left: 5%;
+}
+
+.bar-card-image{
+  height: 20%;
+  width: 80%;
+  margin: 5%;
+  border-style: solid;
+  border-radius: .5rem;
+  border-color: transparent;
+}
+
+.bar-card-button{
+  font-family: 'Ultra', serif;
+  font-size: 12px;
+  color:#005A9E;
+  height: 8%;
+  width: 30%;
+  padding-top: 7px;
+  padding-bottom: 10px;
+  padding-left: 3px;
+  padding-right: 3px;
+  background-color: aliceblue;
+  border-color: #FF4F00;
+  border-radius: 40px;
+}
+
+.bar-card-button:hover{
+  background-color: rgb(192, 225, 255)  
+}
+
+.bar-card-info{
+  text-align:  center;
+  display: grid;
+  position: relative;
+  top: 8em;
+  font-size: large;
+  font-family:"Ultra", serif;
+  height: 3em;
+  color: #005A9E;
+}
+
+
+/* bar info page */
+.bar-info-page{
+  text-align: center;
+}
+
+.review-body{
+  position: relative;
+  left: 35%;
+  width: 30%;
+  margin: 20px;
+}
+
+.bar-info-page > h3{
+  font-size: 20px;
+  text-decoration: underline;
+}
+
+.welcome{
+  background-color: transparent;
+  color: rgb(255, 153, 29);
+  font-size: 10pc;
+  position: relative;
+  bottom: 100%;
+  left:35%;
+}
+
+.motto{
+  background-color: transparent;
+  color: rgb(2, 67, 172);
+  font-size: 30px;
+  position: relative;
+  bottom: 125%;
+  left:35%;
+}
+
+/* crawllist page */
+.crawllist-page{
+  background-color: antiquewhite;
+}
+
+.crawllist-page-title{
+  color: rgb(246, 247, 248);
+  text-align: center;
+  font-size: 65pt;
+  font-family:"Ultra", serif;
+  position: relative;
+  bottom: 50pc;
+  /* background-color: transparent; */
+  text-shadow: 5px 5px 5px #005A9E;
+  margin-top: 25pc;
+}
+
+.crawllist-image{
+  width: 100%;
+  height: 40pc;
+}
+.crawllist-container{
+  padding-left: 100px;
+  padding-right: 80px;
+  margin-top: -500px;
+}
+
+.bar-crawl{
+  display: flex;
+  overflow-x: scroll;
+  gap: 10rem;
+  padding-left: 100px;
+  padding-right: 80px;
+  height: 400px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background-color:rgba(192, 225, 255, 0.308);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+
+.crawllist-img{
+  height: 250px;
+  width: 250px;
+  border-radius: .5rem;
+  margin: 30px
+}
+
+.crawl-bar{
+  font-family: "Ultra", serif;
+  font-size: large;
+  color: #005A9E;
+  margin-top: 2rem;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.crawl-name{
+  margin-top: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-family: "Ultra", serif;
+  font-size: 30px;
+  color: #005A9E;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  background-color: aliceblue;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.crawl-subtitle{
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: aliceblue;
+  /* font-family: "Ultra", serif; */
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+.bar-crawl-review-button{
+  font-family: 'Ultra', serif;
+  font-size: 12px;
+  color:#005A9E;
+  height: 8%;
+  width: 8%;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 3px;
+  padding-right: 3px;
+  background-color: aliceblue;
+  border-color: #FF4F00;
+  border-radius: 40px;
+}
+
+.bar-crawl-review-button:hover{
+  background-color: rgb(192, 225, 255)  
+}
+
+.crawl-reviews{
+  /* justify-content: center; */
+  align-items: center;
+  /* position: absolute; */
+  display: flex;
+  flex-direction: column;
+  border-style: solid;
+  border-width: 4px;
+  border-color: #005A9E;
+  border-radius: 10px;
+  font-size: medium;
+  height: auto;
+  font-family: 'Ultra', serif;
+  background-color: antiquewhite;
+}
+
+.crawl-reviews h3{
+  color: #005A9E;
+  font-size: 25px;
+  font-family: 'Ultra', serif;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.crawl-reviews button{
+  /* margin: auto; */
+  height: 35px;
+  width: 175px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-family: 'Ultra', serif;
+  color: #005A9E;
+  /* align-self: center; */
+  background-color: aliceblue;
+  border-color: #FF4F00;
+  border-radius: 40px;
+  text-align: center;
+}
+
+.crawl-reviews button:hover{
+  background-color: rgb(192, 225, 255)
+}
+
+.crawl-review-details{
+  background-color: aliceblue;
+  height: auto;
+  width: 85%;
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom:solid #ff51001c;
+}
+
+.review-username{
+  margin-bottom: 5px;
+}
+.review-detail{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;;
 }
