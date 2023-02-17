@@ -113,6 +113,7 @@ function BarName(bar){
         <div>
             <h5>{bar.bar[0].name}</h5>
             <h6>{bar.bar[0].location}</h6>
+            <img className="crawllist-img" src={bar.bar[0].image} alt={bar.bar[0].name}/>
         </div>
     )
 }
