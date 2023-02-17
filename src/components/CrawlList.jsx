@@ -161,7 +161,7 @@ function BarCrawl({crawl, barArray, navigate}){
 //function to show an individual bar in a crawl
 function CrawlBar({bar}){
     return(
-        <div>
+        <div className="weird">
             <div className="crawl-bar"> {bar[0].name} </div>   
             <img className="crawllist-img" src={bar[0].image} alt={bar[0].name}/>
             <h1 className="crawl-arrow"> {<SlArrowRight />} </h1>

@@ -13,7 +13,6 @@ export default function Account ({loggedInUser, setLoggedInUser}){
     const [toggleLookFriendsRequests, setToggleLookFriendsRequests] = useState(false);
     const [toggleNewFriendSearch, setToogleNewFriendSearch] = useState(false);
 
-
     // console.log(loggedInUser);
 
     //fetch all the reviews
@@ -46,7 +45,6 @@ export default function Account ({loggedInUser, setLoggedInUser}){
     useEffect(() => {
         fetchUsers()
     }, [])
-
     //flip state of the Friend Request tab toggle
     const handleToggleRequests = () => {
         setToggleLookFriendsRequests(!toggleLookFriendsRequests);
@@ -55,7 +53,6 @@ export default function Account ({loggedInUser, setLoggedInUser}){
     const handleToggleNewFriendSearch = () => {
         setToogleNewFriendSearch(!toggleNewFriendSearch);
     }
-
 
     //stops the code from running if the fetch for the reviews hasn't finished
     // if (!reviewArray[0]) return null
@@ -188,6 +185,7 @@ export default function Account ({loggedInUser, setLoggedInUser}){
                 </div>
             </div>
                 <div className="friend-list">                   
+
                     <h1 className="friend-list-title"> Friends List</h1>
                     {/* show all of the users friends */}
                     {filteredUserFriendArray.map((friend) => {
@@ -314,6 +312,7 @@ function NewFriend({user}){
     return(
         <div className="potential-friend-details">
             <br></br>
+
             <div className="review-real-name"> Name: {user.real_name} </div>
             <div className="review-username"> Username: {user.username}/5</div>
             <div className="review-email"> Email: {user.email} </div> 
