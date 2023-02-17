@@ -1,9 +1,13 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState,useEffect } from "react";
-import { Form } from "semantic-ui-react"
+import { Form } from "semantic-ui-react";
+import logo1 from './assets/cropped-logo1.png';
+import barPhoto from './assets/another-bar-photo.jpg';
+import {SlArrowRight} from 'react-icons/sl'
 
 
-export default function CreateEventsPage({loggedInUser}){
+
+export default function CreateEventsPage({loggedInUser, setLoggedInUser}){
     const [friendArray, setFriendArray] = useState([])
     const navigate = useNavigate()
     //get the info of the crawl from the prevous page
@@ -28,10 +32,40 @@ export default function CreateEventsPage({loggedInUser}){
         )
     })
 
-        
+        //function to log out by setting the state of the logged in user to undefined
+     //and navigating back to the login page
+     function logOut(){
+        // setLoggedInUser(undefined)
+        // navigate('/')
+        fetch("/logout", {
+            method: "DELETE",
+        }).then((r) => {
+            if (r.ok) {
+                setLoggedInUser(null)
+                navigate('/')
+            }
+        })
+     }
+
     return (
-        <div>
-            <h1>Event based on {crawl.bar_crawl_name}</h1>
+        <div className="crawllist-page">
+                        <div className="header-div">
+                <img className="header-logo" src={logo1} onClick={() => navigate('/home')}/>
+                <div className="nav-bar">
+                    <button type="button" onClick={() => navigate('/about')}> About</button>
+                    <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
+                    <button type="button" onClick={() => navigate('/eventslist')}>View All Events</button>
+                    <button type="button" onClick={() => navigate('/account')}> Account Info</button>
+                    <button type="button" onClick={loggedInUser ? logOut : () => navigate('/')}> Exit</button>
+                </div>
+            </div>
+            <img className="crawllist-image" src={barPhoto} />
+            <h1 className="crawllist-page-title">Plan {loggedInUser.real_name}'s Event</h1>
+            
+            <div className="crawllist-container">
+
+            <h1 className="crawl-name">Your event is based on {crawl.bar_crawl_name}</h1>
+            <h3 className="crawl-subtitle">Hosted by: {loggedInUser.real_name}</h3>
             <EventForm 
                 loggedInUser={loggedInUser}
                 filteredUserFriendArray={filteredUserFriendArray}
@@ -39,6 +73,7 @@ export default function CreateEventsPage({loggedInUser}){
                 crawl={crawl}
                 navigate={navigate}
             />
+            </div>
         </div>
     )
 }
@@ -82,24 +117,15 @@ function EventForm ({loggedInUser, filteredUserFriendArray, barCrawlArray, crawl
 
     return (
         <div>
-            <div>
-                <h4>Invite friends</h4>
-                {filteredUserFriendArray.map((friend) => {
-                    return(
-                        <InviteFriends
-                            friend={friend}
-                            loggedInUser={loggedInUser}
-                        />
-                    )
-                })}
-            </div>
-            <Form onSubmit={(e) => {
+
+            <form onSubmit={(e) => {
                 e.preventDefault();
                 postEvent()
             }}>
-                <h2>Add Event Details</h2>
-                <h3>Hosted by: {loggedInUser.real_name}</h3>
-                <h4>Bars in this Crawl</h4>
+                {/* <h2>Add Event Details</h2> */}
+                {/* <h3>Hosted by: {loggedInUser.real_name}</h3> */}
+                {/* <h4>Bars in this Crawl</h4> */}
+                <div className="bar-crawl">
                 {barCrawlArray.map((bar) => {
                     return(
                         <BarName
@@ -107,11 +133,16 @@ function EventForm ({loggedInUser, filteredUserFriendArray, barCrawlArray, crawl
                         />
                     )
                 })}
-                <Form.Input fluid placeholder="Event Name" onChange={(e) => setEventName(e.target.value)}/>
-                <Form.Input fluid placeholder="Event Description" onChange={(e) => setEventDescription(e.target.value)}/>
+                </div>
+                <div className="create-event">
+                <input className="create-event-input" placeholder="Event Name" onChange={(e) => setEventName(e.target.value)}/>
+                <input className="create-event-input" placeholder="Event Description" onChange={(e) => setEventDescription(e.target.value)}/>
                 <br></br>
-                <Form.Button type="submit">Create Event</Form.Button>
-            </Form>
+                <button className="bar-crawl-review-button" type="submit">Create Event</button>
+
+                </div>
+                <br></br>
+            </form>
         </div>
     )
 }
@@ -140,9 +171,11 @@ function InviteFriends({friend, loggedInUser}){
 
 function BarName(bar){
     return(
-        <div>
-            <h5>{bar.bar[0].name}</h5>
-            <h6>{bar.bar[0].location}</h6>
+        <div >
+            <h5 className="crawl-bar">{bar.bar[0].name}</h5>
+            <h6 className="crawl-bar-subtitle">{bar.bar[0].location}</h6>
+            <img className="crawllist-img" src={bar.bar[0].image} alt={bar.bar[0].name}/>
+            <h1 className="crawl-arrow"> {<SlArrowRight />} </h1>
         </div>
     )
 }

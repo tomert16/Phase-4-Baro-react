@@ -183,10 +183,11 @@ export default function Account ({loggedInUser, setLoggedInUser}){
                     </div>
                 </div>
             </div>
-                <div className="friend-list">                   
+                <div className="lookfriend-form-popup">                   
 
                     <h1 className="friend-list-title"> Friends List</h1>
                     {/* show all of the users friends */}
+                    <div className="friends-lookup">
                     {filteredUserFriendArray.map((friend) => {
                         return (
                             <UserFriendCard
@@ -194,8 +195,9 @@ export default function Account ({loggedInUser, setLoggedInUser}){
                                 friend={friend}
                                 loggedInUser={loggedInUser}
                             />
-                        )
-                    })}
+                            )
+                        })}
+                        </div>
 
                     {/* show friend requests */}
                     {/* <button
@@ -279,7 +281,7 @@ export default function Account ({loggedInUser, setLoggedInUser}){
 function UserReviewCard({review, bar}){
     return(
         <div className="user-review-card">
-
+            <br />
             <div className="user-review-bar">{review.bar?.name}</div>
             <div className="user-review-rating">{review.star_rating}</div>
             <div className="user-review-body">{review.content}</div>            
@@ -292,9 +294,10 @@ function UserFriendCard({friend, loggedInUser}){
 
     return(
         <div className="user-friendslist-card">
-            <div className="friend-user">username: {loggedInUser.id === friend.user_1.id ? friend.user_2.username : friend.user_1.username}</div>       
-            <div className="friends">name: {loggedInUser.id === friend.user_1.id ? friend.user_2.real_name : friend.user_1.real_name}</div>       
-            <div className="friend-user">email: {loggedInUser.id === friend.user_1.id ? friend.user_2.email : friend.user_1.email }</div>       
+            <br></br>
+            <div className="friend-user">{loggedInUser.id === friend.user_1.id ? friend.user_2.real_name : friend.user_1.real_name}</div>       
+            <div className="friends-detail">{loggedInUser.id === friend.user_1.id ? friend.user_2.username : friend.user_1.username}</div>       
+            <div className="friends-detail">{loggedInUser.id === friend.user_1.id ? friend.user_2.email : friend.user_1.email }</div>       
             <br></br>
         </div>        
     )
