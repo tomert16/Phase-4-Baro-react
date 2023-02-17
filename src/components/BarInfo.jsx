@@ -2,8 +2,7 @@
 import { useState,  useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 import { Form } from "semantic-ui-react";
-import logo1 from './assets/cropped-logo1.png'
-
+import logo1 from "../logo1.png";
 
 export default function BarInfo({clickedBar, loggedInUser, setLoggedInUser}){
 
@@ -59,8 +58,8 @@ export default function BarInfo({clickedBar, loggedInUser, setLoggedInUser}){
             method: "DELETE",
         }).then((r) => {
             if (r.ok) {
-                setLoggedInUser(null)
                 navigate('/')
+                setLoggedInUser(null)
             }
         })
      }
@@ -114,6 +113,17 @@ export default function BarInfo({clickedBar, loggedInUser, setLoggedInUser}){
 
             </div>
             <br></br>
+            {/* show all of the reviews for this bar */}
+            <div className="bar-reivew-container">
+                {filteredReviewArray.map((review) => {
+                    return (
+                        <BarReviewCard                        
+                            review={review}  
+                            onUpdateReview={handleUpdateReview}                      
+                        />
+                        )
+                    })}
+            </div>
         </div>
     )
 }
@@ -146,14 +156,14 @@ export default function BarInfo({clickedBar, loggedInUser, setLoggedInUser}){
 
 
 
-function BarReviewCard({review}){
-    // const [contentBody, setContentBody] = useState(review.content)
-    // const [starBody, setStarBody] = useState(review.star_rating)
-    // const  [toggleEdit, setToggleEdit]  = useState(false);
+function BarReviewCard({review, onUpdateReview}){
+    const [contentBody, setContentBody] = useState(review.content)
+    const [starBody, setStarBody] = useState(review.star_rating)
+    const  [toggleEdit, setToggleEdit]  = useState(false);
 
-    // const handleEditToggle = () => {
-    //     setToggleEdit(!toggleEdit)
-    // }
+    const handleEditToggle = () => {
+        setToggleEdit(!toggleEdit)
+    }
     
     // const handleReviewEdit = (e) => {
     //     e.preventDefault();
@@ -177,9 +187,9 @@ function BarReviewCard({review}){
         <div className="bar-review-card">
             <div className="review-author">{review.username}</div>
             <div className="review-rating">{review.star_rating}/5 Stars</div>
-            <div className="bar-review-body">{review.content}</div>     
-            {/* <button className="edit-button" onClick={handleEditToggle}>Edit</button>  */}
-            {/* {toggleEdit ? <form className="edt-form" onSubmit={handleReviewEdit}>
+            <div className="review-body">{review.content}</div>     
+            {/* <button className="edit-button" onClick={handleEditToggle}>Edit</button>
+            {toggleEdit ? <form className="edt-form" onSubmit={handleReviewEdit}>
                 <input  
                     type="text"
                     name="star_rating"
@@ -216,12 +226,9 @@ function BarReviewForm ({loggedInUser, reviewArray, setReviewArray, clickedBar})
     //const [newReview, setNewReview] = useState([])
     const [reviewScore, setReviewScore] = useState("")
     const [reviewContent, setReviewContent] = useState("")
+    const [errors, setErrors] = useState("")
 
     const postReview = async () =>{
-    // const newReviewContent = {
-    //     star_rating: reviewScore,
-    //     content: reviewContent
-    // }
 
 
         const reviewObject = {
@@ -231,26 +238,25 @@ function BarReviewForm ({loggedInUser, reviewArray, setReviewArray, clickedBar})
             bar_id: clickedBar.id
         }
 
-       const req = await fetch("/reviews",{
-            method: 'POST',
-            header: {
+        fetch("/reviews", {
+            method: "POST",
+            headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(reviewObject)
+        }).then ((r) => {
+            if (r.ok) {
+                r.json().then ((review) => setReviewArray([...reviewArray, review]))
+            } else {
+                r.json().then(json => setErrors(json.errors))
+            }
         })
-        const resp = await req.json()
-        setReviewArray([...reviewArray, resp])
+
 
     }
-    //if there is no user logged in, show a message
-    if(loggedInUser === undefined){
+
         return(
 
-            <div className="review-no-login"> Please Login to Post a Review </div>
-        )
-
-    }else{
-        return(
             <div className="review-form-div">
                 <h3 className="write-a-review-title">Write a Review</h3>
                 <h5>By {loggedInUser.username}</h5>
@@ -258,12 +264,15 @@ function BarReviewForm ({loggedInUser, reviewArray, setReviewArray, clickedBar})
                     e.preventDefault();
                     postReview()
                 }}>
+                    {/*  <h3 className="write-a-review-title">Write a Review</h3>
+                    <h5> {loggedInUser ? `By ${loggedInUser.username}` : "Please Login to Post a Review"}</h5>  */}
                     <input id="rating" fluid placeholder="Rating out of 5" onChange={(e) => setReviewScore(e.target.value)}/>
                     <input id="review-content" fluid placeholder="Content" onChange={(e) => setReviewContent(e.target.value)}/>
                     <button id="submit-review" type="submit">Post Review</button>
+                    {errors ? <div>{errors}</div>:null}
                 </form>
             </div>
         )
     }
 
-}
+

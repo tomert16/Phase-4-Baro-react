@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom"
 import { MdFavorite, MdOutlineFavoriteBorder } from 'react-icons/md';
 import {SlArrowRight} from 'react-icons/sl'
 import logo1 from './assets/cropped-logo1.png'
+import Filter from './Filter';
 
 
 
-export default function Home ({setClickedBar, setBarCrawlData, setLoggedInUser, loggedInUser}){
+export default function Home ({setClickedBar, setBarCrawlData, setLoggedInUser, loggedInUser, priceFilter, setPriceFilter, categoryFilter, setCategoryFilter, setNameFilter, nameFilter}){
     const navigate = useNavigate()
     //states list 
     const [barArray, setBarArray] = useState([])
@@ -76,7 +77,20 @@ export default function Home ({setClickedBar, setBarCrawlData, setLoggedInUser, 
             }
         })
      }
-     
+
+     // Dropdown filter for bar price
+     const barNameFilter = barArray.filter((bar) => {
+         return bar.name.toLowerCase().includes(nameFilter.toLowerCase())
+     })
+     const barCategoryFilter = barNameFilter.filter((bar) => {
+         if (categoryFilter == "all") return true;
+         return bar.category.toLowerCase() === categoryFilter.toLowerCase();
+     })
+    
+     const barPriceFilter = barCategoryFilter.filter((bar) => {
+         if (priceFilter === "all") return true;
+         return bar.price === priceFilter;
+     })
 
 
     if (!barArray.length === 0) return null
@@ -132,8 +146,15 @@ export default function Home ({setClickedBar, setBarCrawlData, setLoggedInUser, 
 
 
             {/* display all the bars  */}
+            <Filter 
+                priceFilter={priceFilter} 
+                setPriceFilter={setPriceFilter} 
+                categoryFilter={categoryFilter} 
+                setCategoryFilter={setCategoryFilter} 
+                setNameFilter={setNameFilter}
+            />
             <div className="bar-container">
-                {barArray.map((bar) => {
+                {barPriceFilter.map((bar) => {
                     return(
                         <BarCard
                             type={"main"}
