@@ -433,6 +433,7 @@ button{
   margin-top: 30px;
   margin-left: 10px;
   margin-right: 10px;
+  margin-bottom: 0px;
   font-family: "Ultra", serif;
   font-size: 30px;
   color: #005A9E;
@@ -451,6 +452,9 @@ button{
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   padding-bottom: 10px;
   padding-left: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+
 }
 
 .bar-crawl-review-button{

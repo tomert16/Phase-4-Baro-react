@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import logo1 from './assets/cropped-logo1.png'
 import {SlArrowRight} from 'react-icons/sl'
+import barPhoto from './assets/another-bar-photo.jpg'
 
 
 
@@ -46,7 +47,7 @@ export default function EventsList({setLoggedInUser, loggedInUser}) {
 
 
     return (
-        <div>
+        <div className="crawllist-page">
             
             <div className="header-div">
                 <img className="header-logo" src={logo1} onClick={() => navigate('/home')}/>
@@ -58,10 +59,10 @@ export default function EventsList({setLoggedInUser, loggedInUser}) {
                     <button type="button" onClick={loggedInUser ? logOut : () => navigate('/')}> Exit</button>
                 </div>
             </div>
+            <img className="crawllist-image" src={barPhoto} />
+            <h1 className="crawllist-page-title">Event List</h1>
 
-
-            <div>
-                <h1>Event List</h1>
+            <div className="crawllist-container">
                 {eventArray.map((event) => {
                     return(
                         <Event
@@ -99,14 +100,16 @@ function Event({event, barArray}){
     return(
 
         <div>
-            <h1>{event.event_name}</h1>
-            <h2>Hosted by user {event.user_id}</h2>
-            <h3>Bars in this Event:</h3>
+            <h1 className="crawl-name">{event.event_name}</h1>
+            <h2 className="crawl-subtitle">Hosted by user {event.user_id}</h2>
+            <div className="bar-crawl">
             {barCrawlArray.map((bar) => {
                     return(
                         <EventBar bar={bar}/>
                     )
                 })}
+
+            </div>
         </div>
     )
 }
@@ -115,8 +118,8 @@ function Event({event, barArray}){
 function EventBar({bar}){
     return(
         <div>
-            <div> {bar[0].name} </div>   
-            <img src={bar[0].image} alt={bar[0].name}/>
+            <div className="crawl-bar"> {bar[0].name} </div>   
+            <img  className="crawllist-img" src={bar[0].image} alt={bar[0].name}/>
             <h1 className="crawl-arrow"> {<SlArrowRight />} </h1>
         </div>
     )
