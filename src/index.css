@@ -446,7 +446,7 @@ button{
   gap: 10rem;
   padding-left: 100px;
   padding-right: 80px;
-  height: 400px;
+  height: auto;
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
@@ -460,7 +460,8 @@ button{
   height: 250px;
   width: 250px;
   border-radius: .5rem;
-  margin: 30px
+  margin: 30px;
+  margin-bottom: 0px
 }
 
 .crawl-bar{
@@ -468,6 +469,16 @@ button{
   font-size: large;
   color: #005A9E;
   margin-top: 2rem;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.crawl-bar-subtitle{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: large;
+  color: black;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   margin-right: 30px;
   margin-left: 30px;
 }
@@ -1024,4 +1035,30 @@ button{
   background-color: aliceblue;
   /* height: 300px;
   overflow-x: scroll; */
+}
+
+/* create events page  */
+
+.create-event{
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  justify-content: center;
+  text-align: center;
+  background-color: aliceblue;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  /* padding-left: 100px;
+  padding-right: 80px; */
+  margin-top: -20px;
+}
+
+.create-event-input{
+  width: 200px;
+  height: 40px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: large;
+  margin-left: 20px;
 }
