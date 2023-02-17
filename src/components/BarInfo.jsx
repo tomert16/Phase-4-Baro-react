@@ -113,7 +113,11 @@ export default function BarInfo({clickedBar, loggedInUser, setLoggedInUser}){
 
             </div>
             <br></br>
-            {/* show all of the reviews for this bar */}
+            {/* 
+            
+            DELETE THIS BLOCK BC IT IS A DUPLICATE OF CONTENT RENDERED ABOVE
+
+            show all of the reviews for this bar
             <div className="bar-reivew-container">
                 {filteredReviewArray.map((review) => {
                     return (
@@ -123,7 +127,7 @@ export default function BarInfo({clickedBar, loggedInUser, setLoggedInUser}){
                         />
                         )
                     })}
-            </div>
+            </div> */}
         </div>
     )
 }
@@ -187,7 +191,7 @@ function BarReviewCard({review, onUpdateReview}){
         <div className="bar-review-card">
             <div className="review-author">{review.username}</div>
             <div className="review-rating">{review.star_rating}/5 Stars</div>
-            <div className="review-body">{review.content}</div>     
+            <div className="review-rating">{review.content}</div>     
             {/* <button className="edit-button" onClick={handleEditToggle}>Edit</button>
             {toggleEdit ? <form className="edt-form" onSubmit={handleReviewEdit}>
                 <input  
