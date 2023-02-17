@@ -148,7 +148,6 @@ function BarCrawl({crawl, barArray, navigate}){
                             <button className="exit-form" onClick={handleToggle}> Hide Reviews</button>
                         </div>
                     </div>
-
                 </div> 
                 : 
                 null

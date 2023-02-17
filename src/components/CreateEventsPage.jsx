@@ -36,19 +36,49 @@ export default function CreateEventsPage({loggedInUser}){
                 loggedInUser={loggedInUser}
                 filteredUserFriendArray={filteredUserFriendArray}
                 barCrawlArray={barCrawlArray}
+                crawl={crawl}
+                navigate={navigate}
             />
         </div>
     )
 }
 
-function postEvent(){
-    console.log("post event")
-}
 
-function EventForm ({loggedInUser, filteredUserFriendArray, barCrawlArray}){
+// function postEvent(){
+//     console.log("post event")
+// }
+
+function EventForm ({loggedInUser, filteredUserFriendArray, barCrawlArray, crawl, navigate}){
 
     const [eventName, setEventName] = useState("")
     const [eventDescription, setEventDescription] = useState("")
+
+
+
+    const postEvent = async () => {
+
+        const eventObject = {
+            event_name: eventName,
+            event_description: eventDescription,
+            user_id: loggedInUser.id,
+            bar_crawl_id: crawl.id
+        }
+
+
+        fetch("/crawl_events", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(eventObject)
+        }).then ((r) => {
+            if (r.ok) {
+                r.json().then ((event) => navigate('/eventpage', {state: {event: event}}))
+            }
+        })
+    }
+
+
 
     return (
         <div>

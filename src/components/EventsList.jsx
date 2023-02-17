@@ -68,6 +68,7 @@ export default function EventsList({setLoggedInUser, loggedInUser}) {
                         <Event
                             event={event}
                             barArray={barArray}
+                            navigate={navigate}
                         />
                     )
                 })}
@@ -79,9 +80,11 @@ export default function EventsList({setLoggedInUser, loggedInUser}) {
 }
 
 
-function Event({event, barArray}){
+function Event({event, barArray, navigate}){
 
-
+    function viewEvent(){
+        navigate(`/eventpage`, {state: {event: event}})
+    }    
     
     
     //turn the string of bar ids into an array of bars in the crawl
@@ -95,8 +98,6 @@ function Event({event, barArray}){
         barCrawlArray.push(barCrawlDummy)
     })
     
-    console.log(barCrawlArray)
-
     return(
 
         <div>
@@ -108,8 +109,10 @@ function Event({event, barArray}){
                         <EventBar bar={bar}/>
                     )
                 })}
-
             </div>
+            <button className="bar-crawl-review-button" onClick={viewEvent}>
+                View Event Info
+            </button>
         </div>
     )
 }
