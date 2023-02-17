@@ -97,7 +97,7 @@ function handleReviewSubmit(barCrawlString, barCrawlNameInput, loggedInUser){
         user_id: loggedInUser.id,
         public_private: true
     }
-    fetch ('http://localhost:3000/bar_crawls', {
+    fetch ('/bar_crawls', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

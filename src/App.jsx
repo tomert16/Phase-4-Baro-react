@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
 import {createBrowserRouter,RouterProvider,} from "react-router-dom";
+import { useState, useEffect } from "react";
 import LoginPage from "./components/LoginPage"
 import NewUser from "./components/NewUser"
 import Home from "./components/Home";
@@ -8,6 +8,8 @@ import BarInfo from "./components/BarInfo";
 import Account from "./components/Account";
 import NewCrawl from "./components/NewCrawl";
 import CrawlList from "./components/CrawlList";
+import EventsList from "./components/EventsList";
+import CreateEventsPage from "./components/CreateEventsPage";
 
 
 function App() {
@@ -16,6 +18,9 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState(null)
   const [clickedBar, setClickedBar] = useState()
   const [barCrawlData,  setBarCrawlData] = useState() 
+  const [priceFilter, setPriceFilter] = useState("all")
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [nameFilter, setNameFilter] = useState("");
 
   // useEffect for auto-login
   useEffect(() => {
@@ -56,6 +61,12 @@ function App() {
         setBarCrawlData={setBarCrawlData}
         setLoggedInUser={setLoggedInUser}
         loggedInUser={loggedInUser}
+        priceFilter={priceFilter}
+        setPriceFilter={setPriceFilter}
+        categoryFilter={categoryFilter}
+        setCategoryFilter={setCategoryFilter}
+        nameFilter={nameFilter}
+        setNameFilter={setNameFilter}
       />
     },
     {
@@ -73,6 +84,7 @@ function App() {
       path: "/account",
       element: <Account
         loggedInUser={loggedInUser}
+        
       />
     },
     {
@@ -83,7 +95,23 @@ function App() {
     },
     {
       path: "/crawllist",
-      element: <CrawlList/>
+      element: <CrawlList
+        setLoggedInUser={setLoggedInUser}
+        loggedInUser={loggedInUser}
+      />
+    },
+    {
+      path: "/eventslist",
+      element: <EventsList
+        setLoggedInUser={setLoggedInUser}
+        loggedInUser={loggedInUser}
+      />
+    },
+    {
+      path: "/createeventspage",
+      element: <CreateEventsPage
+        loggedInUser={loggedInUser}
+      />
     }
   ])
   return (

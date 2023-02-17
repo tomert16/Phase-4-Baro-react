@@ -2,8 +2,9 @@
 import { useState,  useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 import { Form } from "semantic-ui-react";
+import logo1 from "../logo1.png";
 
-export default function BarInfo({clickedBar, loggedInUser}){
+export default function BarInfo({clickedBar, loggedInUser, setLoggedInUser}){
 
     
     const navigate = useNavigate()
@@ -48,28 +49,76 @@ export default function BarInfo({clickedBar, loggedInUser}){
     //     console.log("Edit Complete:", updatedReview)
      }
     
+    //function to log out by setting the state of the logged in user to undefined
+     //and navigating back to the login page
+    function logOut(){
+        // setLoggedInUser(undefined)
+        // navigate('/')
+        fetch("/logout", {
+            method: "DELETE",
+        }).then((r) => {
+            if (r.ok) {
+                navigate('/')
+                setLoggedInUser(null)
+            }
+        })
+     }
     
     return(
         <div className="bar-info-page">
-            <button type="button" onClick={() => navigate('/home')}> Home</button>
+
+            <div className="header-div">
+                <img className="header-logo" src={logo1} onClick={() => navigate('/home')}/>
+                <div className="nav-bar">
+                    <button type="button" onClick={() => navigate('/about')}> About</button>
+                    <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
+                    <button type="button" onClick={() => navigate('/account')}> Account Info</button>
+                    <button type="button" onClick={loggedInUser ? logOut : () => navigate('/')}> Exit</button>
+                </div>
+            </div>
+
             {/* info about the bar */}
-            <h1 className="bar-info-name">{clickedBar.name}</h1>
-            <img className="bar-info-image" src={clickedBar.image} alt={clickedBar.name}/>
-            <h2 className="bar-info-rating">{clickedBar.rating}</h2>
-            <h2 className="bar-info-category">{clickedBar.category}</h2>
-            <h2 className="bar-info-location">{clickedBar.location}</h2>
-            <h2 className="bar-info-price">{clickedBar.price}</h2>
-            <h2 className="bar-info-closing-time">{clickedBar.closing_time}</h2>
+            <div className="bar-info-container">
+                    <h1 className="bar-info-name">{clickedBar.name}</h1>
+                    <img className="bar-info-image" src={clickedBar.image} alt={clickedBar.name}/>
+                    {/* <h2 className="bar-info-rating">{clickedBar.rating}</h2> */}
+            <div className="details-reviews-container">
+                <div className="bar-info-details">
+                    <h2 className="bar-info-category">{clickedBar.category}</h2>
+                    <h2 className="bar-info-location">{clickedBar.location}</h2>
+                    <h2 className="bar-info-price">{clickedBar.price}</h2>
+                    <h2 className="bar-info-closing-time">Closing Time: {(clickedBar.closing_time)}</h2>
+                </div>
+                {/* show all of the reviews for this bar */}
+                <div className="bar-reivew-container">
+                    <h3 id="reviews">Reviews</h3>
+                    <div className="scroll-reviews">
+                    {filteredReviewArray.map((review) => {
+                        return (
+                            <BarReviewCard                        
+                                review={review}                        
+                            />
+                            )
+                        })}
+
+                    </div>
+                </div>
+            </div>    
+            </div>
             {/* form to write a review */}
-            <h3>Reviews</h3>
+            <div className="write-a-review-container">
+
             <BarReviewForm clickedBar={clickedBar} loggedInUser={loggedInUser} reviewArray={reviewArray} setReviewArray={setReviewArray}/>
+
+            </div>
             <br></br>
             {/* show all of the reviews for this bar */}
             <div className="bar-reivew-container">
                 {filteredReviewArray.map((review) => {
                     return (
                         <BarReviewCard                        
-                            review={review}                        
+                            review={review}  
+                            onUpdateReview={handleUpdateReview}                      
                         />
                         )
                     })}
@@ -79,22 +128,46 @@ export default function BarInfo({clickedBar, loggedInUser}){
 }
 
 
+// function convert24to12(time) {
+//     console.log(time.toString().length)
+
+//     if (time.toString().length === 3){
+//         let myFunc = num => Number(num);      
+//         var intArr = Array.from(String(time), myFunc);
+
+//         intArr.splice(1,0,":")
+//         let newTime = intArr.toString()
+//         console.log( newTime  )
+
+//         let fourDigitTime = time.toString()
+//         fourDigitTime = "0" + fourDigitTime
+//         // console.log(parseInt(fourDigitTime))
+//     } else {
+//         var hours24 = parseInt(time.substring(0,2));
+//         var hours = ((hours24 + 11) % 12) + 1;
+//         var amPm = hours24 > 11 ? 'pm' : 'am';
+//         var minutes = time.substring(2);
+
+//         return hours + ':' + minutes + amPm;
+//     }
+// }
 
 
 
-function BarReviewCard({review}){
-    // const [contentBody, setContentBody] = useState(review.content)
-    // const [starBody, setStarBody] = useState(review.star_rating)
-    // const  [toggleEdit, setToggleEdit]  = useState(false);
 
-    // const handleEditToggle = () => {
-    //     setToggleEdit(!toggleEdit)
-    // }
+function BarReviewCard({review, onUpdateReview}){
+    const [contentBody, setContentBody] = useState(review.content)
+    const [starBody, setStarBody] = useState(review.star_rating)
+    const  [toggleEdit, setToggleEdit]  = useState(false);
+
+    const handleEditToggle = () => {
+        setToggleEdit(!toggleEdit)
+    }
     
     // const handleReviewEdit = (e) => {
     //     e.preventDefault();
         
-    //     fetch(`http://localhost:3000/reviews/${review.id}`,{
+    //     fetch(`/reviews/${review.id}`,{
     //         method: 'PATCH',
     //         headers: {
     //             "Content-Type": "application/json"
@@ -114,8 +187,8 @@ function BarReviewCard({review}){
             <div className="review-author">{review.username}</div>
             <div className="review-rating">{review.star_rating}/5 Stars</div>
             <div className="review-body">{review.content}</div>     
-            {/* <button className="edit-button" onClick={handleEditToggle}>Edit</button>  */}
-            {/* {toggleEdit ? <form className="edt-form" onSubmit={handleReviewEdit}>
+            {/* <button className="edit-button" onClick={handleEditToggle}>Edit</button>
+            {toggleEdit ? <form className="edt-form" onSubmit={handleReviewEdit}>
                 <input  
                     type="text"
                     name="star_rating"
@@ -134,7 +207,7 @@ function BarReviewCard({review}){
 
             {/* {console.log(review.user?.username)}
             <button className="delete-button" onClick={(e) => {
-                fetch(`http://localhost:3000/reviews/${review.id}`, {
+                fetch(`/reviews/${review.id}`, {
                     method: "DELETE",
                 })
                 .then((r) => r.json())
@@ -152,12 +225,9 @@ function BarReviewForm ({loggedInUser, reviewArray, setReviewArray, clickedBar})
     //const [newReview, setNewReview] = useState([])
     const [reviewScore, setReviewScore] = useState("")
     const [reviewContent, setReviewContent] = useState("")
+    const [errors, setErrors] = useState("")
 
     const postReview = async () =>{
-    // const newReviewContent = {
-    //     star_rating: reviewScore,
-    //     content: reviewContent
-    // }
 
 
         const reviewObject = {
@@ -167,39 +237,38 @@ function BarReviewForm ({loggedInUser, reviewArray, setReviewArray, clickedBar})
             bar_id: clickedBar.id
         }
 
-       const req = await fetch("http://localhost:3000/reviews",{
-            method: 'POST',
-            header: {
+        fetch("/reviews", {
+            method: "POST",
+            headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(reviewObject)
+        }).then ((r) => {
+            if (r.ok) {
+                r.json().then ((review) => setReviewArray([...reviewArray, review]))
+            } else {
+                r.json().then(json => setErrors(json.errors))
+            }
         })
-        const resp = await req.json()
-        setReviewArray([...reviewArray, resp])
+
 
     }
-    //if there is no user logged in, show a message
-    if(loggedInUser === undefined){
-        return(
 
-            <div className="review-no-login"> Please Login to Post a Review </div>
-        )
-
-    }else{
         return(
             <div>
-                <Form onSubmit={(e) => {
+                <form onSubmit={(e) => {
                     e.preventDefault();
                     postReview()
                 }}>
-                    <h3>Write a Review</h3>
-                    <h5>By {loggedInUser.username}</h5>
-                    <Form.Input fluid placeholder="Score" onChange={(e) => setReviewScore(e.target.value)}/>
-                    <Form.Input fluid placeholder="Content" onChange={(e) => setReviewContent(e.target.value)}/>
-                    <Form.Button type="submit">Post Review</Form.Button>
-                </Form>
+                    <h3 className="write-a-review-title">Write a Review</h3>
+                    <h5> {loggedInUser ? `By ${loggedInUser.username}` : "Please Login to Post a Review"}</h5>
+                    <input id="rating" fluid placeholder="Rating out of 5" onChange={(e) => setReviewScore(e.target.value)}/>
+                    <input id="review-content" fluid placeholder="Content" onChange={(e) => setReviewContent(e.target.value)}/>
+                    <button id="submit-review" type="submit">Post Review</button>
+                    {errors ? <div>{errors}</div>:null}
+                </form>
             </div>
         )
     }
 
-}
+

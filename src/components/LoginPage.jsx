@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Form } from "semantic-ui-react";
 import logo1 from '../logo1.png'
@@ -20,7 +20,7 @@ export default function LoginPage ({ setLoggedInUser}){
     }
 
     const fetchUsers = async () => {
-        const req = await fetch('http://localhost:3000/users')
+        const req = await fetch('/users')
         const res = await req.json()
         setUserArray(res)
     }
@@ -32,17 +32,6 @@ export default function LoginPage ({ setLoggedInUser}){
     //handles setting who the logged in user is finding if there is a user name 
     //and password that match on the user array
     function handleLogin(){
-        // let loginArray = userArray.filter((user) => {
-        //     return user.username === usernameInput && user.password === passwordInput
-        // })[0]
-        // //if there is no user name and password that match then alert the user
-        // if (loginArray === undefined){
-        //     alert("Incorrect Username or Password")
-        // //if there is a match we set the logged in user to the user that matched and go to the home page
-        // }else{
-        //     setLoggedInUser(loginArray)
-        //     navigate('/home')
-        // }
         fetch("/login", {
             method: "POST",
             headers: {
