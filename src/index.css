@@ -271,6 +271,49 @@ button{
   bottom: 40%;
   background-color: transparent;
 }
+/* search form */
+.search-bars{
+  display: flex;
+  margin-top: 70px;
+  margin-right: 5%;
+  margin-left: 5%;
+  margin-bottom: -100px;
+  padding-top: 20px;
+  justify-content: center;
+  text-align: center;
+  background-color: aliceblue;
+  border-radius: 8px;;
+}
+
+.search-bars h1{
+  font-family: "Ultra", serif;
+  color: #005A9E;
+  margin-right: 40px;
+
+}
+
+.search-bars label{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: large;
+  margin-right: 10px;
+  height: 40px;
+}
+
+.search-bars select{
+  width: 200px;
+  height: 40px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: large;
+  margin-right: 40px;
+}
+.search-bars input{
+  width: 200px;
+  height: 40px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: large;
+  margin-right: 40px;
+}
+
 
 /* mapped bars */
 .bar-container{
