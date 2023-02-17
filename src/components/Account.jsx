@@ -260,9 +260,12 @@ export default function Account ({loggedInUser, setLoggedInUser}){
                                 <div className="friends-lookup">
                                 {filteredUserArray.map((user) => {
                                 return(
-                                    <NewFriend user={user}/>
+                                    <NewFriend 
+                                        user={user}
+                                        loggedInUser={loggedInUser}
+                                    />
                                 )
-                                })})        
+                                })}        
                                 </div>
                                  
                         </div>
@@ -304,11 +307,47 @@ function UserFriendCard({friend, loggedInUser}){
 }
 
 
-function acceptFriend() {
-    console.log("accept friend")
-}
 
 function PendingFriend({friend, loggedInUser}){
+
+
+
+    const acceptFriend = () => {
+
+          
+        
+        // const fetchFriend = async () => {
+        //     const req = await fetch(`/friendship_tables/${friend.id}`, {
+        //         method: 'PATCH',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         friend_status: 1
+        //     })
+        //     }
+                
+        //     )
+        //     const res = await req.json()
+        //     // setFriendArray(res)
+        // }
+        // fetchFriend()
+        
+
+
+        fetch(`/friendship_tables/${friend.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                friend_status: 1
+            })
+        }).then(res => res.json())
+
+
+    }
+
     return(
         <div className="potential-friend-details">
             <br></br>
@@ -321,11 +360,27 @@ function PendingFriend({friend, loggedInUser}){
     )
 }
 
-function setFriendRequest() {
-    console.log("set friend request")
-}
 
-function NewFriend({user}){
+function NewFriend({user, loggedInUser}){
+    
+    function setFriendRequest() {
+        
+        const newFriendRequestObject = {
+            user_2_id: user.id,
+            friend_status: 0
+        }
+        console.log(newFriendRequestObject)
+
+        fetch("/friendship_tables", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newFriendRequestObject)
+        }).then(res => res.json())        
+    }
+
+
     return(
         <div className="potential-friend-details">
             <br></br>

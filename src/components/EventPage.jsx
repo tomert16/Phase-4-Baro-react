@@ -55,6 +55,7 @@ export default function EventPage ({loggedInUser, setLoggedInUser}) {
             (friend.user_2.id === loggedInUser.id && friend.friend_status === 1)
         )
     })
+
     
     //function to log out by setting the state of the logged in user to undefined
      //and navigating back to the login page
@@ -71,6 +72,7 @@ export default function EventPage ({loggedInUser, setLoggedInUser}) {
         })
      }
     
+
 
     return (
         <div div className="crawllist-page">
@@ -144,7 +146,6 @@ function EventComment(comment){
 }
 
 function InviteFriends({filteredUserFriendArray, loggedInUser}){
-
     return (
         <div>
             <h3 className="bar-info-price">
