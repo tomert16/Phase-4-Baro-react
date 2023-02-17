@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Form } from "semantic-ui-react";
-import logo1 from './assets/cropped-logo1.png'
+import logo1 from '../logo1.png'
 
 export default function LoginPage ({ setLoggedInUser}){
     const navigate = useNavigate();
-    
+    // const history = useHistory();
     //states used
     const [userArray, setUserArray] = useState([])
     const [usernameInput, setUsernameInput] = useState("")
@@ -29,7 +29,8 @@ export default function LoginPage ({ setLoggedInUser}){
         fetchUsers()
     }, [])
     
-   
+    //handles setting who the logged in user is finding if there is a user name 
+    //and password that match on the user array
     function handleLogin(){
         fetch("/login", {
             method: "POST",
@@ -56,7 +57,9 @@ export default function LoginPage ({ setLoggedInUser}){
     return(
         <div className="login-background">
             <div className="login-div">
-                <img className="logo" src={logo1} />
+                {/* <h1 className="welcome">BarO</h1>
+                <h2 className="motto">Bar Hopping Made Easy</h2> */}
+                <img className="logo"  src={logo1}/>
                 <button className="start-btn" onClick={handleToggle}>Begin Hopping</button>
                 { toggleLogin ? <div className="form-popup">
                     <div className="form-div">
@@ -93,3 +96,4 @@ export default function LoginPage ({ setLoggedInUser}){
             </div>
         )
     }
+
