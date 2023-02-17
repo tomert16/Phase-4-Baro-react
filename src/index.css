@@ -652,19 +652,19 @@ button{
 
 .bar-info-location{
   font-family: "Ultra", serif;
-  font-size: 30px;
+  font-size: 25px;
   padding-left: 10%;
 }
 
 .bar-info-price{
   font-family: "Ultra", serif;
-  font-size: 30px;
+  font-size: 25px;
   padding-left: 10%;
 }
 
 .bar-info-closing-time{
   font-family: "Ultra", serif;
-  font-size: 30px;
+  font-size: 25px;
   padding-left: 10%;
 }
 
@@ -736,7 +736,7 @@ button{
 
 .write-a-review-title{
   font-family: "Ultra", serif;
-  color:rgb(2, 67, 172);
+  color:#005A9E;
   font-size: 30px;
 }
 
@@ -1061,4 +1061,36 @@ button{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: large;
   margin-left: 20px;
+}
+
+.event-info-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: aliceblue;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: -576px;
+  padding-bottom: 200px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.invite-button{
+  margin-bottom: 15px;
+  margin-left: 50px;
+  height: 35px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-family: 'Ultra', serif;
+  color: #005A9E;
+
+  background-color: aliceblue;
+  border-color: #FF4F00;
+  border-radius: 40px;
+  text-align: center;
+}
+
+.invite-button:hover{
+  background-color: rgb(192, 225, 255)
 }
