@@ -1,22 +1,40 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Form } from "semantic-ui-react"
 
 
 export default function CreateEventsPage({loggedInUser}){
-
+    const [friendArray, setFriendArray] = useState([])
     const navigate = useNavigate()
     //get the info of the crawl from the prevous page
     const {state} = useLocation()
     let crawl = state.crawl
 
-    console.log(crawl)
 
+    useEffect(() => {
+        const fetchFriend = async () => {
+            const req = await fetch('/friendship_tables')
+            const res = await req.json()
+            setFriendArray(res)
+        }    
+        fetchFriend()
+    }, [])
+
+    const filteredUserFriendArray = friendArray.filter((friend) => {
+        return (
+            (loggedInUser.id === friend.user_1.id && friend.friend_status === 1) 
+            || 
+            (friend.user_2.id === loggedInUser.id && friend.friend_status === 1)
+        )
+    })
+
+        
     return (
         <div>
             <h1>Event based on {crawl.bar_crawl_name}</h1>
             <EventForm 
                 loggedInUser={loggedInUser}
+                filteredUserFriendArray={filteredUserFriendArray}
             />
         </div>
     )
@@ -26,7 +44,7 @@ function postEvent(){
     console.log("post event")
 }
 
-function EventForm ({loggedInUser}){
+function EventForm ({loggedInUser, filteredUserFriendArray}){
 
     const [eventName, setEventName] = useState("")
     const [eventDescription, setEventDescription] = useState("")
@@ -43,11 +61,35 @@ function EventForm ({loggedInUser}){
                 <Form.Input fluid placeholder="Event Description" onChange={(e) => setEventDescription(e.target.value)}/>
                 <div>
                     <h4>Invite friends</h4>
-                    <div>FREINDS LIST COMPONENT GOES HERE</div>
+                    {filteredUserFriendArray.map((friend) => {
+                        return(
+                            <InviteFriends
+                                friend={friend}
+                                loggedInUser={loggedInUser}
+                            />
+                        )
+                    })}
                 </div>
                 <br></br>
                 <Form.Button type="submit">Create Event</Form.Button>
             </Form>
         </div>
+    )
+}
+
+function InviteFriends({friend, loggedInUser}){
+
+    const [inviteStatus, setInviteStatus] = useState(false)
+
+    function changeInviteStatus(){
+        setInviteStatus(!inviteStatus)
+
+    }
+
+    return(
+        <div className="user-friendslist-card">            
+            <button onClick={changeInviteStatus}>{inviteStatus ? "Uninvite" : "Invite"} {loggedInUser.id === friend.user_1.id ? friend.user_2.real_name : friend.user_1.real_name}</button>      
+            <br></br>
+        </div>  
     )
 }
