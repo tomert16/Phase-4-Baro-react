@@ -101,13 +101,14 @@ function BarCrawl({crawl, barArray, navigate}){
         barCrawlArray.push(barCrawlDummy)
     })
 
+
     //flip the state of the review toggle
     const handleToggle = () => {
         setToggleReviews(!toggleReviews);
     }
 
     const makeEvent = () => {
-        navigate('/createeventspage', {state: {crawl: crawl}})
+        navigate('/createeventspage', {state: {crawl: crawl, barCrawlArray: barCrawlArray}})
     }
     
 

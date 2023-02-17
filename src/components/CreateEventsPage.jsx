@@ -9,7 +9,7 @@ export default function CreateEventsPage({loggedInUser}){
     //get the info of the crawl from the prevous page
     const {state} = useLocation()
     let crawl = state.crawl
-
+    let barCrawlArray = state.barCrawlArray
 
     useEffect(() => {
         const fetchFriend = async () => {
@@ -35,6 +35,7 @@ export default function CreateEventsPage({loggedInUser}){
             <EventForm 
                 loggedInUser={loggedInUser}
                 filteredUserFriendArray={filteredUserFriendArray}
+                barCrawlArray={barCrawlArray}
             />
         </div>
     )
@@ -44,32 +45,40 @@ function postEvent(){
     console.log("post event")
 }
 
-function EventForm ({loggedInUser, filteredUserFriendArray}){
+function EventForm ({loggedInUser, filteredUserFriendArray, barCrawlArray}){
 
     const [eventName, setEventName] = useState("")
     const [eventDescription, setEventDescription] = useState("")
 
     return (
         <div>
+            <div>
+                <h4>Invite friends</h4>
+                {filteredUserFriendArray.map((friend) => {
+                    return(
+                        <InviteFriends
+                            friend={friend}
+                            loggedInUser={loggedInUser}
+                        />
+                    )
+                })}
+            </div>
             <Form onSubmit={(e) => {
                 e.preventDefault();
                 postEvent()
             }}>
                 <h2>Add Event Details</h2>
                 <h3>Hosted by: {loggedInUser.real_name}</h3>
+                <h4>Bars in this Crawl</h4>
+                {barCrawlArray.map((bar) => {
+                    return(
+                        <BarName
+                            bar={bar}
+                        />
+                    )
+                })}
                 <Form.Input fluid placeholder="Event Name" onChange={(e) => setEventName(e.target.value)}/>
                 <Form.Input fluid placeholder="Event Description" onChange={(e) => setEventDescription(e.target.value)}/>
-                <div>
-                    <h4>Invite friends</h4>
-                    {filteredUserFriendArray.map((friend) => {
-                        return(
-                            <InviteFriends
-                                friend={friend}
-                                loggedInUser={loggedInUser}
-                            />
-                        )
-                    })}
-                </div>
                 <br></br>
                 <Form.Button type="submit">Create Event</Form.Button>
             </Form>
@@ -84,6 +93,11 @@ function InviteFriends({friend, loggedInUser}){
     function changeInviteStatus(){
         setInviteStatus(!inviteStatus)
 
+        if (inviteStatus === false){
+            console.log("user " + loggedInUser.id + " invited user " + (loggedInUser.id === friend.user_1.id ? friend.user_2.id : friend.user_1.id))
+        }else{
+            console.log("user " + loggedInUser.id + " uninvited user" + (loggedInUser.id === friend.user_1.id ? friend.user_2.id : friend.user_1.id))
+        }
     }
 
     return(
@@ -91,5 +105,14 @@ function InviteFriends({friend, loggedInUser}){
             <button onClick={changeInviteStatus}>{inviteStatus ? "Uninvite" : "Invite"} {loggedInUser.id === friend.user_1.id ? friend.user_2.real_name : friend.user_1.real_name}</button>      
             <br></br>
         </div>  
+    )
+}
+
+function BarName(bar){
+    return(
+        <div>
+            <h5>{bar.bar[0].name}</h5>
+            <h6>{bar.bar[0].location}</h6>
+        </div>
     )
 }
