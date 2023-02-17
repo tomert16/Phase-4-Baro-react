@@ -34,9 +34,9 @@ export default function About({setLoggedInUser}){
                 </div>
             </div>
             <div className="about-container">
-            <img className="about-logo" src={logo1} />
-            <p>A project made by Avi, Daniel, Olivia, and Tomer.</p> 
-            <p id="dedication">In Memoriam of: James Prawdzik</p>
+                <img className="about-logo" src={logo1} />
+                <p>A project made by Avi, Daniel, Olivia, and Tomer.</p> 
+                <p id="dedication">In Memoriam of: James Prawdzik</p>
             </div>
         </div>        
     )

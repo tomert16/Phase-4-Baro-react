@@ -3,6 +3,7 @@ import CreateEventsPage from "./components/CreateEventsPage";
 import EventsList from "./components/EventsList";
 import LoginPage from "./components/LoginPage";
 import CrawlList from "./components/CrawlList";
+import EventPage from "./components/EventPage";
 import NewCrawl from "./components/NewCrawl";
 import { useState, useEffect } from "react";
 import NewUser from "./components/NewUser";
@@ -40,21 +41,18 @@ function App() {
     {
       path: "*",
       element: <div><h1>404 NOT FOUND</h1></div>
-    },
-    {
+    },{
       path:"/",
       element: <LoginPage
         setLoggedInUser={setLoggedInUser}
       />
-    },
-    {
+    },{
       path: "/newuser",
       element: <NewUser 
         loggedInUser={loggedInUser} 
         setLoggedInUser={setLoggedInUser}
       />
-    },
-    {
+    },{
       path: "/home",
       element: <Home
         setClickedBar={setClickedBar}
@@ -68,48 +66,46 @@ function App() {
         nameFilter={nameFilter}
         setNameFilter={setNameFilter}
       />
-    },
-    {
+    },{
       path: "/about",
       element: <About/>
-    },
-    {
+    },{
       path:"/barinfo",
       element: <BarInfo
         clickedBar={clickedBar}
         loggedInUser={loggedInUser}
       />
-    },
-    {
+    },{
       path: "/account",
       element: <Account
         loggedInUser={loggedInUser}
         
       />
-    },
-    {
+    },{
       path: "/newcrawl",
       element: <NewCrawl
         barCrawlData={barCrawlData}
       />
-    },
-    {
+    },{
       path: "/crawllist",
       element: <CrawlList
         setLoggedInUser={setLoggedInUser}
         loggedInUser={loggedInUser}
       />
-    },
-    {
+    },{
       path: "/eventslist",
       element: <EventsList
         setLoggedInUser={setLoggedInUser}
         loggedInUser={loggedInUser}
       />
-    },
-    {
+    },{
       path: "/createeventspage",
       element: <CreateEventsPage
+        loggedInUser={loggedInUser}
+      />
+    },{
+      path: "/eventpage",
+      element: <EventPage
         loggedInUser={loggedInUser}
       />
     }
