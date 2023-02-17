@@ -36,7 +36,7 @@ export default function About({setLoggedInUser}){
             <div className="about-container">
             <img className="about-logo" src={logo1} />
             <p>A phase 3 and 4 project made by Avi, Daniel, Olivia, and Tomer.</p> 
-            <p id="dedication">Dedicated to: James P</p>
+            <p id="dedication">In Memoriam of: James Prawdzik</p>
             </div>
         </div>        
     )
