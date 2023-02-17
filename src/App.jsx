@@ -18,6 +18,9 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState(null)
   const [clickedBar, setClickedBar] = useState()
   const [barCrawlData,  setBarCrawlData] = useState() 
+  const [priceFilter, setPriceFilter] = useState("all")
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [nameFilter, setNameFilter] = useState("");
 
   // useEffect for auto-login
   useEffect(() => {
@@ -25,8 +28,6 @@ function App() {
     .then((r) => {
       if (r.ok) {
         r.json().then((user) => setLoggedInUser(user));
-      } else {
-        setLoggedInUser(null)
       }
     });
   },[]);
@@ -47,7 +48,7 @@ function App() {
       />
     },
     {
-      path: "newuser",
+      path: "/newuser",
       element: <NewUser 
         loggedInUser={loggedInUser} 
         setLoggedInUser={setLoggedInUser}
@@ -60,6 +61,12 @@ function App() {
         setBarCrawlData={setBarCrawlData}
         setLoggedInUser={setLoggedInUser}
         loggedInUser={loggedInUser}
+        priceFilter={priceFilter}
+        setPriceFilter={setPriceFilter}
+        categoryFilter={categoryFilter}
+        setCategoryFilter={setCategoryFilter}
+        nameFilter={nameFilter}
+        setNameFilter={setNameFilter}
       />
     },
     {
@@ -71,7 +78,6 @@ function App() {
       element: <BarInfo
         clickedBar={clickedBar}
         loggedInUser={loggedInUser}
-        setLoggedInUser={setLoggedInUser}
       />
     },
     {
@@ -85,7 +91,6 @@ function App() {
       path: "/newcrawl",
       element: <NewCrawl
         barCrawlData={barCrawlData}
-        loggedInUser={loggedInUser}
       />
     },
     {
@@ -122,3 +127,4 @@ function App() {
 }
 
 export default App
+
