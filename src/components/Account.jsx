@@ -10,7 +10,7 @@ export default function Account ({loggedInUser, setLoggedInUser}){
     const [reviewArray, setReviewArray] = useState([])
     const [friendArray, setFriendArray] = useState([])
     const [usersArray, setUsersArray] = useState([])
-    const [toggleLookFriends, setToggleLookFriends] = useState(false);
+    const [showAllFriends, setShowAllFriends] = useState(false);
 
     // console.log(loggedInUser);
 
@@ -45,10 +45,10 @@ export default function Account ({loggedInUser, setLoggedInUser}){
         fetchUsers()
     }, [])
 
-    //flip state of the lookforfriends toggle
-    const handleToggle = () => {
-        setToggleLookFriends(!toggleLookFriends);
-    }
+    // //flip state of the lookforfriends toggle
+    // const handleToggle = () => {
+    //     setToggleLookFriends(!toggleLookFriends);
+    // }
 
 
     //stops the code from running if the fetch for the reviews hasn't finished
@@ -143,7 +143,7 @@ export default function Account ({loggedInUser, setLoggedInUser}){
                 </div>
             </div>
                 <div className="friend-list">                   
-                    <h1 className="friend-list-title"> Friends List</h1>
+                    <h1 className="friend-list-title">Friends List</h1>
 
                     {/* show all of the users friends */}
                     {filteredUserFriendArray.map((friend) => {
@@ -154,29 +154,26 @@ export default function Account ({loggedInUser, setLoggedInUser}){
                             loggedInUser={loggedInUser}
                         />
                     )
-        
-
                 })}
                 {/* Look for friends button/toggle */}
-                        <button
-                        className="look-for-friends-button"
-                        onClick={handleToggle}
-                        > Look for more friends
-                        </button>
-                         { toggleLookFriends ? 
+                        {showAllFriends ? (<button
+                        className="make-friends-button"
+                        onClick={()=> setShowAllFriends(!showAllFriends)}
+                        > Hide Users
+                        </button>) : (<button
+                        className="make-friends-button"
+                        onClick={()=> setShowAllFriends(!showAllFriends)}
+                        > Make Friends
+                        </button>)}
+                         { showAllFriends ? 
                                 <div className="lookfriend-form-popup">
-                                <div className="form-div">
+                                    <div className="all-users-div">
+                                    <h3 className="all-users"> All Users </h3>
+                                    {/* <button className="make-friends-button" onClick={handleToggle}>Hide Users</button> */}
                                     <div className="friends-lookup">
-            
-                                    <h3> All Users </h3>
-                                    <button className="exit-form" onClick={handleToggle}> Hide Users</button>
-                                    <br></br>
                                     {usersArray.map((user) => {
                                         return(
-                                            <>
-                                            <PotentialFriend user={user}/>
-                                            <button>add friend</button>
-                                            </>
+                                            <PotentialFriend user={user}/>                                            
                                         )
                                     })}
             
@@ -184,6 +181,7 @@ export default function Account ({loggedInUser, setLoggedInUser}){
                                 </div>
             
                             </div> 
+                                    
 
                             :
                             null           
@@ -228,10 +226,11 @@ function PotentialFriend({user}){
     return(
         <div className="potential-friend-details">
             <br></br>
-            <div className="review-real-name"> Name: {user.real_name} </div>
-            <div className="review-username"> Username: {user.username}/5</div>
-            <div className="review-email"> Email: {user.email} </div> 
-            <br></br>  
+            <div className="review-username">{user.real_name} </div>
+            <div className="review-detail">{user.username}</div>
+            <div className="review-detail">{user.email} </div> 
+            <br></br>
+            <button className="add-friend">Add Friend</button>  
         </div>
     )
 }
