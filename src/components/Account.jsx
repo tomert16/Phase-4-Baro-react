@@ -13,7 +13,6 @@ export default function Account ({loggedInUser, setLoggedInUser}){
     const [toggleLookFriendsRequests, setToggleLookFriendsRequests] = useState(false);
     const [toggleNewFriendSearch, setToogleNewFriendSearch] = useState(false);
 
-    console.log(loggedInUser);
 
     //fetch all the reviews
     const fetchReviews = async () => {
