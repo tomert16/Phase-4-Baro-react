@@ -85,6 +85,7 @@ function App() {
       path: "/newcrawl",
       element: <NewCrawl
         barCrawlData={barCrawlData}
+        loggedInUser={loggedInUser}
       />
     },{
       path: "/crawllist",

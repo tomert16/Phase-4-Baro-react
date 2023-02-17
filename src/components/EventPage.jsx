@@ -53,7 +53,7 @@ export default function EventPage ({loggedInUser}) {
             (friend.user_2.id === loggedInUser.id && friend.friend_status === 1)
         )
     })
-    
+
     return (
         <div>
             <h1> {event.event_name} </h1>
@@ -101,7 +101,6 @@ function EventComment(comment){
 }
 
 function InviteFriends({filteredUserFriendArray, loggedInUser}){
-
     return (
         <div>
             <h3>
