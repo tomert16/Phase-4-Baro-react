@@ -119,7 +119,7 @@ export default function Home ({setClickedBar, setBarCrawlData, setLoggedInUser, 
                     <div className="bar-crawl-list">
                         {crawlArray.map((bar) => {
                             return(
-                                <div>
+                                <div className="gap">
                                     <BarCard
                                         type={'crawl'}
                                         setClickedBar={setClickedBar}

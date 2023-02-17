@@ -1,15 +1,15 @@
 import {createBrowserRouter,RouterProvider,} from "react-router-dom";
+import CreateEventsPage from "./components/CreateEventsPage";
+import EventsList from "./components/EventsList";
+import LoginPage from "./components/LoginPage";
+import CrawlList from "./components/CrawlList";
+import NewCrawl from "./components/NewCrawl";
 import { useState, useEffect } from "react";
-import LoginPage from "./components/LoginPage"
-import NewUser from "./components/NewUser"
-import Home from "./components/Home";
-import About from "./components/About";
+import NewUser from "./components/NewUser";
 import BarInfo from "./components/BarInfo";
 import Account from "./components/Account";
-import NewCrawl from "./components/NewCrawl";
-import CrawlList from "./components/CrawlList";
-import EventsList from "./components/EventsList";
-import CreateEventsPage from "./components/CreateEventsPage";
+import About from "./components/About";
+import Home from "./components/Home";
 
 
 function App() {

@@ -58,6 +58,7 @@ export default function CrawlList({setLoggedInUser, loggedInUser}) {
                 <div className="nav-bar">
                     <button type="button" onClick={() => navigate('/about')}> About</button>
                     <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
+                    <button type="button" onClick={() => navigate('/eventslist')}>View All Events</button>
                     <button type="button" onClick={() => navigate('/account')}> Account Info</button>
                     <button type="button" onClick={loggedInUser ? logOut : () => navigate('/')}> Exit</button>
                 </div>
@@ -152,7 +153,7 @@ function BarCrawl({crawl, barArray, navigate}){
                 null
             }
             <button className="bar-crawl-review-button" onClick={makeEvent}>
-                Make Crawl into an Event
+                Create a Crawl Event
             </button>
         </div>
     )
@@ -161,7 +162,7 @@ function BarCrawl({crawl, barArray, navigate}){
 //function to show an individual bar in a crawl
 function CrawlBar({bar}){
     return(
-        <div>
+        <div className="weird">
             <div className="crawl-bar"> {bar[0].name} </div>   
             <img className="crawllist-img" src={bar[0].image} alt={bar[0].name}/>
             <h1 className="crawl-arrow"> {<SlArrowRight />} </h1>

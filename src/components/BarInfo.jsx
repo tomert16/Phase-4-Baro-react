@@ -72,6 +72,7 @@ export default function BarInfo({clickedBar, loggedInUser, setLoggedInUser}){
                 <div className="nav-bar">
                     <button type="button" onClick={() => navigate('/about')}> About</button>
                     <button type="button" onClick={() => navigate('/crawllist')}> View All Crawls</button>
+                    <button type="button" onClick={() => navigate('/eventslist')}> View All Events</button>
                     <button type="button" onClick={() => navigate('/account')}> Account Info</button>
                     <button type="button" onClick={loggedInUser ? logOut : () => navigate('/')}> Exit</button>
                 </div>
@@ -255,7 +256,8 @@ function BarReviewForm ({loggedInUser, reviewArray, setReviewArray, clickedBar})
     }
 
         return(
-            <div>
+
+            <div className="review-form-div">
                 <form onSubmit={(e) => {
                     e.preventDefault();
                     postReview()
