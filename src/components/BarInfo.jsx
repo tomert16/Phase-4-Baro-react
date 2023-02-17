@@ -252,12 +252,12 @@ function BarReviewForm ({loggedInUser, reviewArray, setReviewArray, clickedBar})
     }else{
         return(
             <div className="review-form-div">
-                <form onSubmit={(e) => {
+                <h3 className="write-a-review-title">Write a Review</h3>
+                <h5>By {loggedInUser.username}</h5>
+                <form className="write-a-review-form" onSubmit={(e) => {
                     e.preventDefault();
                     postReview()
                 }}>
-                    <h3 className="write-a-review-title">Write a Review</h3>
-                    <h5>By {loggedInUser.username}</h5>
                     <input id="rating" fluid placeholder="Rating out of 5" onChange={(e) => setReviewScore(e.target.value)}/>
                     <input id="review-content" fluid placeholder="Content" onChange={(e) => setReviewContent(e.target.value)}/>
                     <button id="submit-review" type="submit">Post Review</button>

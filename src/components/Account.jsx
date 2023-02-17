@@ -199,19 +199,27 @@ export default function Account ({loggedInUser, setLoggedInUser}){
                     })}
 
                     {/* show friend requests */}
-                    <button
+                    {/* <button
                         className="look-for-friends-button"
                         onClick={handleToggleRequests}
                     > See Friend Requests
-                    </button>
+                    </button> */}
+                        { toggleLookFriendsRequests ? (
+                            <button 
+                            className="look-for-friends-button"
+                            onClick={handleToggleRequests}>Hide Requests</button>
+                            ) : (
+                            <button 
+                            className="look-for-friends-button"
+                            onClick={handleToggleRequests}>Show Requests</button>
+                             )
+                        }
+
                         { toggleLookFriendsRequests ? 
                             <div className="lookfriend-form-popup">
-                            <div className="form-div">
+                         
+                                <h3>Pending Requests</h3>
                                 <div className="friends-lookup">
-        
-                                <h3> All Users </h3>
-                                <button className="exit-form" onClick={handleToggleRequests}> Hide Users </button>
-                                <br></br>
                                 {pendingFriendRequestArray.map((friend) => {
                                     return(
                                         <PendingFriend 
@@ -221,7 +229,7 @@ export default function Account ({loggedInUser, setLoggedInUser}){
                                         />                                            
                                     )
                                 })}            
-                                </div>
+                       
                             </div>            
                         </div>
                         :
@@ -229,26 +237,33 @@ export default function Account ({loggedInUser, setLoggedInUser}){
                     }
 
                     {/* Show new new friend search */}
-                     <button
-                        className="look-for-friends-button"
-                        onClick={handleToggleNewFriendSearch}
-                    > Look for more friends
+
+                    { toggleNewFriendSearch ? 
+                    (<button 
+                        onClick={handleToggleNewFriendSearch} className="look-for-friends-button">
+                            Collapse Search
                     </button>
-                        { toggleNewFriendSearch ? 
-                            <div className="lookfriend-form-popup">
-                            <div className="form-div">
-                                <div className="friends-lookup">
-        
+                    ) : (
+                    <button 
+                        onClick={handleToggleNewFriendSearch} 
+                        className="look-for-friends-button">
+                            Search for Friends
+                    </button>
+                    )}
+
+
+                    { toggleNewFriendSearch ? 
+                        <div className="lookfriend-form-popup">
+                         
                                 <h3> All Users </h3>
-                                <button className="exit-form" onClick={handleToggleNewFriendSearch}> Hide Users </button>
-                                <br></br>
+                                <div className="friends-lookup">
                                 {filteredUserArray.map((user) => {
-                                    return(
-                                        <NewFriend user={user}/>
-                                    )
-                                })}            
+                                return(
+                                    <NewFriend user={user}/>
+                                )
+                                })})        
                                 </div>
-                            </div>            
+                                 
                         </div>
                         :
                         null           
@@ -258,7 +273,7 @@ export default function Account ({loggedInUser, setLoggedInUser}){
             </div>
             </div>
         )
-    }
+    } 
 }
 
 //the card that shows each of the user's reviews
@@ -295,10 +310,10 @@ function PendingFriend({friend, loggedInUser}){
     return(
         <div className="potential-friend-details">
             <br></br>
-            <div className="friend-user">username: {loggedInUser.id === friend.user_1.id ? friend.user_2.username : friend.user_1.username}</div>       
-            <div className="friends">name: {loggedInUser.id === friend.user_1.id ? friend.user_2.real_name : friend.user_1.real_name}</div>       
-            <div className="friend-user">email: {loggedInUser.id === friend.user_1.id ? friend.user_2.email : friend.user_1.email }</div>     
-            <button onClick={acceptFriend}>Accept Friend Request</button>
+            <div className="friend-user">{loggedInUser.id === friend.user_1.id ? friend.user_2.real_name : friend.user_1.real_name}</div>       
+            <div className="friends-detail">{loggedInUser.id === friend.user_1.id ? friend.user_2.username : friend.user_1.username}</div>       
+            <div className="friends-detail">{loggedInUser.id === friend.user_1.id ? friend.user_2.email : friend.user_1.email }</div>     
+            <button onClick={acceptFriend} className="grid-button">Accept</button>
             <br></br>  
         </div>
     )
@@ -313,10 +328,10 @@ function NewFriend({user}){
         <div className="potential-friend-details">
             <br></br>
 
-            <div className="review-real-name"> Name: {user.real_name} </div>
-            <div className="review-username"> Username: {user.username}/5</div>
-            <div className="review-email"> Email: {user.email} </div> 
-            <button onClick={setFriendRequest}>Send Friend Request</button>
+            <div className="friend-user">{user.real_name}</div>
+            <div className="friends-detail">{user.username}/5</div>
+            <div className="friends-detail">{user.email}</div> 
+            <button onClick={setFriendRequest} className="grid-button">Send Request</button>
             <br></br>  
         </div>
     )
