@@ -963,3 +963,22 @@ button{
 .create-account-form button:clicked{
   background-color: rgb(192, 225, 255)
 }
+
+/* new crawl page  */
+.list-and-form{
+  /* display: flex;
+  flex-direction: column; */
+  margin-top: -500px;
+  background-color: aliceblue;
+  height: 500px;
+  width: 80%;
+  /* align-self: center; */
+  
+}
+
+.new-crawl-list{
+  width: 50%;
+  background-color: aliceblue;
+  /* height: 300px;
+  overflow-x: scroll; */
+}
