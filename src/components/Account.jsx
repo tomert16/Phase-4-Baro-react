@@ -312,8 +312,28 @@ function PendingFriend({friend, loggedInUser}){
 
 
 
-    function acceptFriend() {
-        console.log(friend.id)
+    const acceptFriend = () => {
+
+          
+        
+        // const fetchFriend = async () => {
+        //     const req = await fetch(`/friendship_tables/${friend.id}`, {
+        //         method: 'PATCH',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         friend_status: 1
+        //     })
+        //     }
+                
+        //     )
+        //     const res = await req.json()
+        //     // setFriendArray(res)
+        // }
+        // fetchFriend()
+        
+
 
         fetch(`/friendship_tables/${friend.id}`, {
             method: 'PATCH',
@@ -323,9 +343,7 @@ function PendingFriend({friend, loggedInUser}){
             body: JSON.stringify({
                 friend_status: 1
             })
-            .then((r) => r.json())
-            .then(friend)
-        })
+        }).then(res => res.json())
 
 
     }
